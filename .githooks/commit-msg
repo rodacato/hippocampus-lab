@@ -1,0 +1,83 @@
+#!/bin/bash
+#
+# Git commit-msg hook
+# Validates commit message format and rejects co-author lines
+#
+
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # No Color
+
+# Check for co-author lines (reject them)
+if echo "$COMMIT_MSG" | grep -qi "co-authored-by"; then
+    echo -e "${RED}Error: Commit message contains Co-Authored-By line${NC}"
+    echo "This project does not use co-author lines in commits."
+    echo ""
+    echo "Please remove the Co-Authored-By line and try again."
+    exit 1
+fi
+
+# Validate commit message format
+# Expected: <type>: <description>
+# Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build, revert
+
+FIRST_LINE=$(echo "$COMMIT_MSG" | head -n 1)
+
+# Check if first line matches the pattern
+if ! echo "$FIRST_LINE" | grep -qE "^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\(.+\))?: .+"; then
+    echo -e "${RED}Error: Invalid commit message format${NC}"
+    echo ""
+    echo "Expected format: <type>: <description>"
+    echo "  or: <type>(<scope>): <description>"
+    echo ""
+    echo "Valid types:"
+    echo "  feat     - A new feature"
+    echo "  fix      - A bug fix"
+    echo "  docs     - Documentation changes"
+    echo "  style    - Code style changes (formatting, etc)"
+    echo "  refactor - Code refactoring"
+    echo "  test     - Adding or updating tests"
+    echo "  chore    - Maintenance tasks"
+    echo "  perf     - Performance improvements"
+    echo "  ci       - CI/CD changes"
+    echo "  build    - Build system changes"
+    echo "  revert   - Reverting a previous commit"
+    echo ""
+    echo "Examples:"
+    echo "  feat: add user authentication"
+    echo "  fix(api): handle null response"
+    echo "  docs: update README"
+    echo ""
+    echo "Your message: $FIRST_LINE"
+    exit 1
+fi
+
+# Check that description starts with lowercase (conventional commits style)
+DESCRIPTION=$(echo "$FIRST_LINE" | sed -E 's/^[a-z]+(\([^)]+\))?: //')
+FIRST_CHAR=$(echo "$DESCRIPTION" | cut -c1)
+
+if echo "$FIRST_CHAR" | grep -qE "^[A-Z]"; then
+    echo -e "${YELLOW}Warning: Description should start with lowercase${NC}"
+    echo "Consider: '$FIRST_LINE' -> '$(echo "$FIRST_LINE" | sed -E "s/: ([A-Z])/: \L\1/")'"
+    # Just a warning, don't block
+fi
+
+# Check line length (soft limit 72, hard limit 100)
+LINE_LENGTH=${#FIRST_LINE}
+if [ $LINE_LENGTH -gt 100 ]; then
+    echo -e "${RED}Error: Commit message first line too long ($LINE_LENGTH chars)${NC}"
+    echo "Maximum allowed: 100 characters"
+    exit 1
+elif [ $LINE_LENGTH -gt 72 ]; then
+    echo -e "${YELLOW}Warning: Commit message first line is $LINE_LENGTH chars${NC}"
+    echo "Recommended: 72 characters or less"
+    # Just a warning, don't block
+fi
+
+echo -e "${GREEN}Commit message format OK${NC}"
+exit 0
