@@ -1,5 +1,7 @@
 # Research: Cognitive Memory for LLMs
 
+> For detailed definitions of terms, see [glossary.md](glossary.md)
+
 ## Human Memory Foundations
 
 To optimize AI, we first need to understand how the brain manages limited resources:
@@ -42,6 +44,59 @@ Where:
 |-----------|------|----------|
 | **Huginn** (Thought) | Attention | Decides which memory fragments to "surface" to context |
 | **Muninn** (Memory) | Storage | Consolidates experiences during idle periods |
+
+## Memory Phenomena Critical to Our Experiments
+
+These cognitive phenomena directly affect how we design experiments and interpret results.
+
+### Serial Position Effect
+
+The U-shaped recall curve: we remember beginnings (primacy) and endings (recency) better than middles.
+
+```
+Recall accuracy
+     |  ****                              ****
+     |      ***                        ***
+     |         **                    **
+     |           **    ********    **
+     |             ****        ****
+     +-----------------------------------------> Position
+        Early        Middle          Recent
+```
+
+**LLM manifestation:** "Lost in the Middle" phenomenon. Liu et al. (2023) showed LLMs exhibit the same pattern—information in the middle of long prompts is processed worse.
+
+**Experimental implication:** When testing recall, we must sample from all positions and report position-specific accuracy, not just overall accuracy.
+
+### Von Restorff Effect (Distinctiveness)
+
+Distinctive items are remembered better regardless of position. A user's name stands out more than a technical detail.
+
+**Experimental implication:** We must control for **saliency** when testing position effects. If we find "early information is remembered better," is it really position, or is it that users tend to share salient info (name, role) early?
+
+**Solution:** Design datasets where same-saliency information appears at different positions.
+
+### Interference
+
+Memories compete. Adding more context can actually hurt performance by creating interference.
+
+| Type | Description | LLM Example |
+|------|-------------|-------------|
+| Proactive | Old memories block new | Old project details interfere with current project |
+| Retroactive | New memories block old | Recent conversation makes model forget earlier facts |
+
+**This validates the Harvard finding:** Add-all hurts because irrelevant history interferes with relevant retrieval.
+
+### Forgetting as Feature
+
+Human forgetting is adaptive—it maintains signal-to-noise ratio. We forget:
+- Routine, repeated information (habituation)
+- Information not accessed recently (decay)
+- Information superseded by updates
+
+**Design principle:** A good memory system should forget strategically, not remember everything.
+
+---
 
 ## Impact on LLM Inference
 
@@ -232,6 +287,49 @@ Models with 1M+ token windows rarely maintain high-precision reasoning beyond 30
 | **Memory Hierarchy** | MemGPT | Core/Recall/Archival tiers |
 | **Active Compression** | Focus 22.7% savings | Continuous consolidation |
 | **Effective Context < Declared** | 30-60% useful | Don't trust max window |
+
+---
+
+## Methodological Considerations
+
+### Why Multiple Baselines Matter
+
+A single "full context" baseline is insufficient. We need:
+
+| Baseline | What it answers |
+|----------|-----------------|
+| Full context | Upper bound: maximum info available |
+| Random subset | Does *any* context help, or does it need to be relevant? |
+| Recency-only | Is only recent info needed? |
+| No context | Lower bound: model's prior knowledge |
+
+If a technique beats "random" but not "recency," we've learned something important about what matters.
+
+### Objective vs Subjective Metrics
+
+**Problem:** Using LLM-as-judge to evaluate LLM responses creates circular bias.
+
+**Solution:** Separate metrics into:
+
+1. **Objective (no LLM):** Exact match, entity F1, token count
+2. **Subjective (LLM + human calibration):** Coherence, fluency
+
+Calibrate subjective metrics with ~20% human evaluation to ensure the judge is aligned.
+
+### Statistical Rigor
+
+For publishable results:
+- n ≥ 30 per condition (not 10)
+- Report 95% confidence intervals
+- Use Bonferroni correction for multiple comparisons
+- Report effect sizes (Cohen's d), not just p-values
+
+### Controlling Confounders
+
+When testing position effects (Lost in the Middle):
+1. Control for **saliency** - same-importance info at different positions
+2. Control for **semantic category** - compare like with like
+3. Control for **context length** - the effect depends on total length
 
 ---
 
