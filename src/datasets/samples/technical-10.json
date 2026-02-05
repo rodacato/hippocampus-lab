@@ -1,0 +1,146 @@
+{
+  "id": "technical-10",
+  "turns": [
+    {
+      "role": "user",
+      "content": "We're hitting rate limits on our API. The limit is 100 requests per minute per API key. The affected endpoint is /api/v3/search/products.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "100 requests per minute is a fairly common rate limit. Let's figure out what's causing you to exceed it. What kind of client is making these requests and how are they distributed?"
+    },
+    {
+      "role": "user",
+      "content": "The client is mobile-app-ios and the API key prefix is mk_live_ for the production key. The app does a lot of search queries as users type in the search bar.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That explains it. Search-as-you-type on mobile can easily fire a request for every keystroke, and if users type fast you'll burn through 100 requests per minute quickly. There are a few approaches to fix this."
+    },
+    {
+      "role": "user",
+      "content": "When we get rate limited, the API returns a 429 status with a Retry-After header set to 30 seconds. That's a long pause for users to wait.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "30 seconds is indeed a harsh penalty for a mobile search experience. The key is to never hit that 429 in the first place. You need a combination of client-side debouncing and request management."
+    },
+    {
+      "role": "user",
+      "content": "We already have debouncing at 300ms but it's not enough. During busy periods with many active users sharing the same API key, we still exceed the limit.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "If debouncing alone isn't enough, you need request queuing on the client side to regulate the actual rate of API calls. Since you're allowed 100 per minute, that's roughly one request every 600 milliseconds. A queue that enforces this spacing would keep you under the limit."
+    },
+    {
+      "role": "user",
+      "content": "So the solution is to implement request queuing with a 600ms delay between calls. That way we stay under 100 per minute. How should I structure the queue?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Create a request queue class that holds pending requests in an array. Process them sequentially with a 600ms timer between each dispatch. When a new request comes in while the queue is busy, add it to the queue. You can also implement priority so search requests take precedence over less urgent calls."
+    },
+    {
+      "role": "user",
+      "content": "Should the queue cancel stale search requests? If a user types 'laptop bag' quickly, I don't need results for 'lap', 'lapt', 'lapto' etc.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely. Implement request deduplication in the queue. When a new search request comes in, cancel any pending search requests that haven't been sent yet. This way you only send the most recent search term, which dramatically reduces the number of actual API calls."
+    },
+    {
+      "role": "user",
+      "content": "That makes sense. What about caching? If a user searches for 'laptop' again, we shouldn't hit the API a second time.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Add a local cache layer with a short TTL, maybe 5 minutes for search results. Before any request enters the queue, check the cache first. This is especially effective for popular searches that many users perform. Use the search query as the cache key."
+    },
+    {
+      "role": "user",
+      "content": "Good idea. One more thing, should we also consider getting a higher rate limit from the API provider, or is 100 per minute standard?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "100 per minute is on the lower end for a production application. It's worth contacting the provider to request a higher tier. Many APIs offer enterprise plans with 1000 or more requests per minute. In the meantime, the queuing, deduplication, and caching strategy will keep you within the current limits."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the rate limit and which endpoint is affected?",
+      "expectedAnswer": "100 requests per minute per API key on the /api/v3/search/products endpoint",
+      "expectedEntities": ["100 requests per minute", "/api/v3/search/products"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the client name and API key prefix?",
+      "expectedAnswer": "The client is mobile-app-ios with API key prefix mk_live_",
+      "expectedEntities": ["mobile-app-ios", "mk_live_"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the Retry-After header value when rate limited?",
+      "expectedAnswer": "30 seconds",
+      "expectedEntities": ["30 seconds"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the proposed solution and what delay should be used between queued requests?",
+      "expectedAnswer": "Implement request queuing with a 600ms delay between calls to stay under 100 per minute",
+      "expectedEntities": ["600ms", "request queuing"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What optimization was suggested for repeated searches by users?",
+      "expectedAnswer": "Add a local cache layer with a 5 minute TTL using the search query as the cache key",
+      "expectedEntities": ["cache", "5 minutes"],
+      "infoLocation": "recent",
+      "salienceLevel": "low"
+    }
+  ]
+}

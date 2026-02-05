@@ -1,0 +1,146 @@
+{
+  "id": "technical-02",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I'm setting up a new PostgreSQL database called analytics_prod for our data pipeline. The connection string will be postgresql://admin@db-primary.internal:5432/analytics_prod. Can you help me plan the schema?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Sure, I can help with the schema design for analytics_prod. What kind of data are you storing? Knowing the domain will help me suggest a good table structure and indexing strategy."
+    },
+    {
+      "role": "user",
+      "content": "It's a product analytics system. We need three main tables: events, users, and sessions. Events is the big one - it'll store clickstream data and could grow to billions of rows.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Good plan. For a table like events that will grow to billions of rows, you'll definitely want to use table partitioning. I'd suggest partitioning the events table by time, probably monthly or weekly depending on your query patterns. For users and sessions, standard tables with proper indexes should be fine. Want me to sketch out CREATE TABLE statements?"
+    },
+    {
+      "role": "user",
+      "content": "Yes please. Also, the events table should have columns for event_id, user_id, session_id, event_type, properties as JSONB, and created_at as timestamptz.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Here's what I'd suggest for the events table:\n\nCREATE TABLE events (\n  event_id UUID DEFAULT gen_random_uuid() PRIMARY KEY,\n  user_id UUID NOT NULL REFERENCES users(user_id),\n  session_id UUID NOT NULL REFERENCES sessions(session_id),\n  event_type VARCHAR(100) NOT NULL,\n  properties JSONB DEFAULT '{}',\n  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()\n) PARTITION BY RANGE (created_at);\n\nWith indexes on user_id, session_id, event_type, and a GIN index on properties. Shall I draft the users and sessions tables too?"
+    },
+    {
+      "role": "user",
+      "content": "That looks solid. Yes, draft those too. By the way, I'm also planning to put pgBouncer in front of the database for connection pooling since we'll have a lot of microservices connecting.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Smart move with pgBouncer. For analytics workloads with many microservices, I'd recommend using transaction-level pooling mode. It gives you the best connection reuse. Just be aware that transaction pooling doesn't support prepared statements, so make sure your ORM or query library isn't relying on those. For the other tables, here's what I'd suggest for users and sessions with standard columns."
+    },
+    {
+      "role": "user",
+      "content": "Great. Now I'm running into an issue. I created the database and tables, but when our application server tries to connect from the 10.0.2.0/24 subnet, it gets a \"no pg_hba.conf entry\" error. The app server IP is 10.0.2.15.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That error means PostgreSQL's host-based authentication file doesn't have a rule allowing connections from that subnet. You need to add an entry to pg_hba.conf. Add this line:\n\nhost analytics_prod admin 10.0.2.0/24 scram-sha-256\n\nThis allows the admin user to connect to analytics_prod from any IP in the 10.0.2.0/24 range using SCRAM-SHA-256 authentication. After editing, reload the config with: SELECT pg_reload_conf(); or sudo systemctl reload postgresql."
+    },
+    {
+      "role": "user",
+      "content": "That fixed the connection issue. Now I want to set up some basic monitoring. What metrics should I track for this kind of analytics database?",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "For an analytics database like this, I'd focus on these key metrics: active connections vs max_connections, transaction throughput (commits/rollbacks per second), cache hit ratio from pg_stat_database (aim for above 99%), table bloat and dead tuples in the events table since it'll get heavy writes, replication lag if you add replicas later, and query duration percentiles from pg_stat_statements. You can use pg_stat_statements extension for query performance tracking."
+    },
+    {
+      "role": "user",
+      "content": "Good advice. One more thing - should I set up any specific PostgreSQL configuration tuning for this workload? The server has 64GB of RAM.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "With 64GB of RAM and a write-heavy analytics workload, here are the key settings to tune in postgresql.conf: shared_buffers = 16GB (25% of RAM), effective_cache_size = 48GB (75% of RAM), work_mem = 256MB (higher for analytics queries with sorting), maintenance_work_mem = 2GB (for VACUUM and index builds on the events table), wal_buffers = 64MB, and max_wal_size = 4GB. Also increase checkpoint_completion_target to 0.9 for smoother write performance."
+    },
+    {
+      "role": "user",
+      "content": "Perfect. I'll apply those settings and schedule a maintenance window. Thanks for walking me through the whole setup.",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "You're welcome. To recap: you've got analytics_prod with partitioned events, users, and sessions tables, pgBouncer for connection pooling, pg_hba.conf configured for the 10.0.2.0/24 subnet, and tuned PostgreSQL settings for your 64GB server. Remember to set up partition management to automatically create new monthly partitions for the events table. Good luck with the data pipeline!"
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the full connection string for the PostgreSQL database?",
+      "expectedAnswer": "postgresql://admin@db-primary.internal:5432/analytics_prod",
+      "expectedEntities": ["postgresql://admin@db-primary.internal:5432/analytics_prod"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What are the three main tables in the analytics_prod schema?",
+      "expectedAnswer": "events, users, and sessions",
+      "expectedEntities": ["events", "users", "sessions"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What tool is being used for connection pooling in front of PostgreSQL?",
+      "expectedAnswer": "pgBouncer",
+      "expectedEntities": ["pgBouncer"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What data type was chosen for the properties column in the events table?",
+      "expectedAnswer": "JSONB",
+      "expectedEntities": ["JSONB"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What subnet was blocked by pg_hba.conf and needed to be allowed?",
+      "expectedAnswer": "10.0.2.0/24",
+      "expectedEntities": ["10.0.2.0/24", "pg_hba.conf"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
+    }
+  ]
+}

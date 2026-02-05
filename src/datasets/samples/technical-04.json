@@ -1,0 +1,159 @@
+{
+  "id": "technical-04",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I'm dealing with a memory leak in our Node.js service called image-resizer-service. It's running on Node 20.11.0 and memory usage keeps climbing over time.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Memory leaks in Node.js services can be tricky to pin down. Let's start gathering some data. How quickly is the memory growing, and do you notice it correlating with any specific type of request or traffic pattern?"
+    },
+    {
+      "role": "user",
+      "content": "It climbs past 2GB after roughly 1000 image resize requests. We're using the sharp library for image processing. After hitting 2GB the process gets OOM killed by the container runtime.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a very telling pattern - 2GB after 1000 requests means roughly 2MB leaked per request, which sounds like image buffers not being freed. Sharp uses libvips under the hood for native memory allocation, so the leak might not show up in V8 heap snapshots since it lives in native memory. Have you tried taking heap snapshots to see if it's JS-side or native?"
+    },
+    {
+      "role": "user",
+      "content": "I took a V8 heap snapshot and it only shows about 150MB of JS heap, so yeah, it seems like native memory. What should I look at with sharp specifically?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "With sharp, there are two common culprits for native memory leaks. First, sharp has a built-in cache for frequently used operations that can accumulate a lot of memory. Second, if you're creating sharp instances from Buffers and not properly consuming the output, the native image data can linger. Can you share the code that handles the resize operation?"
+    },
+    {
+      "role": "user",
+      "content": "Here's the core function:\n\nasync function resizeImage(inputBuffer, width, height) {\n  const image = sharp(inputBuffer);\n  const metadata = await image.metadata();\n  const resized = await image.resize(width, height).toBuffer();\n  return resized;\n}",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "I can see the issue. There are a few problems here. First, you're calling image.metadata() and then image.resize().toBuffer() separately, which creates two pipelines from the same sharp instance. Second, the inputBuffer stays referenced while sharp holds onto it internally. And critically, you're not disabling sharp's cache, which is on by default and will cache decoded image data in native memory."
+    },
+    {
+      "role": "user",
+      "content": "So the fix is to disable the cache? How do I do that?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Yes, add sharp.cache(false) at the top of your module or during application startup. This disables libvips' operation cache which is the main source of native memory accumulation. For a server that processes many unique images, the cache does more harm than good since the same image is rarely processed twice. Put it right after your import/require statement."
+    },
+    {
+      "role": "user",
+      "content": "Got it. And you mentioned something about explicit buffer cleanup? What does that look like in practice?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "For explicit buffer cleanup, restructure your function to release references as soon as possible. Here's the improved version:\n\nasync function resizeImage(inputBuffer, width, height) {\n  sharp.cache(false);\n  const resized = await sharp(inputBuffer)\n    .resize(width, height)\n    .toBuffer();\n  inputBuffer = null; // Allow GC to collect the input\n  return resized;\n}\n\nAlso consider calling sharp.cache(false) once at startup rather than in every call. The key is to use a single pipeline chain and null out references to large buffers when you're done with them."
+    },
+    {
+      "role": "user",
+      "content": "Should I also set the concurrency limit for sharp? I've heard that can help with memory usage too.",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Yes, good thinking. Use sharp.concurrency(1) to limit libvips to using a single thread for processing. By default it uses the number of CPU cores, which means multiple images can be decoded simultaneously in native memory. Limiting concurrency trades throughput for lower peak memory usage. For your image-resizer-service, you can compensate by running multiple container replicas behind a load balancer instead."
+    },
+    {
+      "role": "user",
+      "content": "Alright, let me deploy these changes and monitor. What's a good way to track native memory usage to verify the leak is fixed? process.memoryUsage() doesn't seem to capture it.",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "You're right that process.memoryUsage() only shows V8 heap. For native memory, look at process.memoryUsage().rss which shows the total resident set size including native allocations. Also, from outside the process you can monitor the container's memory usage through your container runtime metrics. On Node 20.11.0 you can also use the --max-old-space-size flag to limit the V8 heap, but since your leak is native, container memory limits are your real safety net."
+    },
+    {
+      "role": "user",
+      "content": "I deployed with sharp.cache(false) and explicit buffer cleanup. Memory is now stable at around 350MB even after 5000 requests. The leak is fixed!",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Excellent result! Going from 2GB after 1000 requests to stable at 350MB after 5000 requests is a massive improvement. The combination of sharp.cache(false) and explicit buffer cleanup did the trick. I'd recommend adding a memory usage metric to your monitoring dashboard so you can catch any future regressions early. Also consider adding a periodic log of process.memoryUsage().rss to image-resizer-service for visibility."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the name of the Node.js service experiencing the memory leak?",
+      "expectedAnswer": "image-resizer-service",
+      "expectedEntities": ["image-resizer-service"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What version of Node.js is the service running on?",
+      "expectedAnswer": "Node 20.11.0",
+      "expectedEntities": ["20.11.0"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "How much memory did the V8 heap snapshot show, and what did that indicate?",
+      "expectedAnswer": "About 150MB of JS heap, indicating the leak was in native memory not V8",
+      "expectedEntities": ["150MB", "native memory"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What was the name of the function that had the memory leak, and what library did it use?",
+      "expectedAnswer": "resizeImage function using the sharp library",
+      "expectedEntities": ["resizeImage", "sharp"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What was the memory usage after deploying the fix, and how many requests was it tested with?",
+      "expectedAnswer": "Stable at around 350MB after 5000 requests",
+      "expectedEntities": ["350MB", "5000"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "id": "technical-06",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I've got a slow query on our order_items table. It has about 12 million rows and some queries are taking forever. We're running MySQL 8.0 on RDS.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "12 million rows is significant but well within what MySQL 8.0 can handle efficiently. Let's start diagnosing. Can you share the slow query and the output of EXPLAIN on it? That will tell us where the bottleneck is."
+    },
+    {
+      "role": "user",
+      "content": "Sure. The query filters by customer_id and orders by created_at. The EXPLAIN shows a full table scan, type is ALL with rows estimated at around 12 million.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "A full table scan on 12M rows explains the slowness. If you're filtering by customer_id and sorting by created_at, you need a composite index on those two columns in that order. The index on (customer_id, created_at) would let MySQL both filter and sort using the index."
+    },
+    {
+      "role": "user",
+      "content": "That makes sense. Right now the query takes about 4.2 seconds to complete. What kind of improvement can I expect after adding the index?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "With a proper composite index, you should see a dramatic improvement. For a query that filters on one customer and sorts by date, you could go from seconds down to milliseconds. Let's add the index and measure."
+    },
+    {
+      "role": "user",
+      "content": "I ran ALTER TABLE order_items ADD INDEX idx_customer_created (customer_id, created_at) and now the same query runs in 45 milliseconds. That's a huge improvement.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "From 4.2 seconds down to 45ms is excellent. That's roughly a 93x speedup. The composite index lets MySQL seek directly to the relevant customer_id partition and walk the created_at values in order without a filesort."
+    },
+    {
+      "role": "user",
+      "content": "Great. I have another performance concern though. We have a view called reports_monthly that joins 6 tables together and it's becoming a bottleneck for our reporting dashboard.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Views that join many tables can be problematic because MySQL re-executes the entire query each time the view is referenced. With 6 tables, the query planner has a lot of join orders to evaluate. What kind of data does reports_monthly produce?"
+    },
+    {
+      "role": "user",
+      "content": "It aggregates monthly sales, returns, and inventory counts. It gets called about 50 times a day by different dashboard widgets. Should I materialize it somehow?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Yes, materialization is the right approach. MySQL doesn't have native materialized views, but you can create a summary table and refresh it on a schedule. Since it's called 50 times a day but the underlying data is monthly, a cron job that refreshes every hour or even every few hours would be more than sufficient."
+    },
+    {
+      "role": "user",
+      "content": "That sounds good. I'll create a reports_monthly_cache table and set up an event to refresh it. Should I use MySQL events or an external cron for that?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "On RDS, I'd recommend using MySQL events since they're built in and don't require external infrastructure. Just make sure the event_scheduler is enabled in your RDS parameter group. You can verify with SHOW VARIABLES LIKE 'event_scheduler'."
+    },
+    {
+      "role": "user",
+      "content": "Perfect. One last thing, should I also look at enabling the query cache on MySQL 8.0?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Actually, MySQL 8.0 removed the query cache entirely. It was deprecated in 5.7 and fully removed in 8.0. The query cache had significant mutex contention issues at scale. For your use case, the composite index and materialized summary table approach is the right path forward."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the name of the table with the slow query, and how many rows does it have?",
+      "expectedAnswer": "The order_items table with 12 million rows",
+      "expectedEntities": ["order_items", "12 million"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What database engine and hosting platform are they using?",
+      "expectedAnswer": "MySQL 8.0 on RDS",
+      "expectedEntities": ["MySQL 8.0", "RDS"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What composite index was added, and what was the performance improvement?",
+      "expectedAnswer": "An index on (customer_id, created_at) improved the query from 4.2 seconds to 45 milliseconds",
+      "expectedEntities": ["customer_id", "created_at", "4.2 seconds", "45 milliseconds"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the name of the problematic view and how many tables does it join?",
+      "expectedAnswer": "The reports_monthly view joins 6 tables",
+      "expectedEntities": ["reports_monthly", "6 tables"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What approach was recommended to handle the slow view, and what table name was proposed for caching?",
+      "expectedAnswer": "Materialize the view into a reports_monthly_cache table refreshed on a schedule using MySQL events",
+      "expectedEntities": ["reports_monthly_cache", "MySQL events"],
+      "infoLocation": "recent",
+      "salienceLevel": "low"
+    }
+  ]
+}

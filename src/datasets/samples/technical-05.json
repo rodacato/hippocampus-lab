@@ -1,0 +1,159 @@
+{
+  "id": "technical-05",
+  "turns": [
+    {
+      "role": "user",
+      "content": "We're migrating our REST API to GraphQL. Currently we have three main endpoints: /api/v2/users, /api/v2/orders, and /api/v2/products. We're using Apollo Server 4 for the GraphQL layer.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a solid migration path. Apollo Server 4 is a great choice - it's framework-agnostic and has good TypeScript support. Are you planning to run GraphQL alongside the REST endpoints during the migration, or doing a hard cutover?"
+    },
+    {
+      "role": "user",
+      "content": "We'll run them side by side. The REST endpoints stay active until all clients migrate. We also have a legacy endpoint /api/v1/legacy-search that's being deprecated and will be removed entirely during this migration.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Running them in parallel is the safest approach. For /api/v1/legacy-search, make sure to communicate the deprecation timeline clearly to consumers. You could add a Deprecation header to responses from that endpoint now so clients get a heads-up. Have you started defining your GraphQL schema yet?"
+    },
+    {
+      "role": "user",
+      "content": "Yes, we have a schema.graphql file started. The User and Product types map pretty cleanly from the REST responses. The tricky one is the Order type because we have a breaking change: the OrderStatus enum changed from strings to integers in our backend recently.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a significant breaking change that needs careful handling. In GraphQL, enums are always represented as strings, which actually works in your favor here. You can define the OrderStatus enum in schema.graphql with meaningful string values and then map the integer values in your resolvers. This creates a clean abstraction layer. What were the string values before and what are the integer mappings?"
+    },
+    {
+      "role": "user",
+      "content": "The old strings were PENDING, PROCESSING, SHIPPED, DELIVERED, CANCELLED. The new integers are 0 through 4 in the same order. So PENDING=0, PROCESSING=1, SHIPPED=2, DELIVERED=3, CANCELLED=4.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect, that's a clean mapping. In your schema.graphql, define it as:\n\nenum OrderStatus {\n  PENDING\n  PROCESSING\n  SHIPPED\n  DELIVERED\n  CANCELLED\n}\n\nThen in your resolver, create a mapping function that converts between integers and the enum strings. This way, GraphQL clients always see the readable string values regardless of the backend representation. The resolver handles the translation transparently."
+    },
+    {
+      "role": "user",
+      "content": "Makes sense. What about the query structure? The /api/v2/users endpoint supports filtering by email and role, and pagination with offset and limit.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "For the users query, I'd define input types for the filters and pagination to keep things organized:\n\ntype Query {\n  users(filter: UserFilter, pagination: PaginationInput): UserConnection!\n}\n\ninput UserFilter {\n  email: String\n  role: UserRole\n}\n\ninput PaginationInput {\n  offset: Int = 0\n  limit: Int = 20\n}\n\nUsing a connection type for the response lets you include total count and pagination metadata alongside the results. This is a common pattern in GraphQL APIs."
+    },
+    {
+      "role": "user",
+      "content": "I like that pattern. Now for the orders query, clients currently fetch /api/v2/orders?userId=123 to get all orders for a user. In GraphQL, should that be a top-level query or nested under the User type?",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Both, actually. Add an orders field to the User type so clients can query a user and their orders in one request - that's one of GraphQL's biggest advantages over REST. Also keep a top-level orders query for cases where you want to query orders across all users with filters. The User.orders field resolver can use a DataLoader to batch and cache database calls, avoiding the N+1 query problem."
+    },
+    {
+      "role": "user",
+      "content": "Good point about DataLoader. We're also worried about query complexity. Some of our REST consumers make very deep nested requests when they switch to GraphQL. Any recommendations?",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Apollo Server 4 doesn't include query depth limiting out of the box, but there are a few approaches. Install graphql-depth-limit to restrict nesting depth, typically set to 5-7 levels. Also consider graphql-query-complexity to assign cost values to fields and reject queries exceeding a threshold. You can add these as validation rules when creating your Apollo Server instance. For your API with users, orders, and products, a depth limit of 6 should be generous enough for legitimate queries while blocking abuse."
+    },
+    {
+      "role": "user",
+      "content": "That's helpful. Last question - what's the best strategy for testing the migration? We need to make sure the GraphQL responses match what the REST endpoints return.",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "I'd recommend a three-pronged approach. First, write integration tests that call both the REST endpoint and the equivalent GraphQL query with the same parameters, then assert the response data matches. Second, use Apollo Server's built-in executeOperation method for unit-testing individual resolvers without HTTP overhead. Third, run a shadow traffic setup where real production requests are mirrored to the GraphQL endpoint and you compare responses, logging any discrepancies. This gives you high confidence before directing clients to the new API."
+    },
+    {
+      "role": "user",
+      "content": "Great advice across the board. I feel like we have a solid plan now for migrating from the REST endpoints to GraphQL using Apollo Server 4, handling the OrderStatus breaking change, and deprecating /api/v1/legacy-search.",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "You've got a comprehensive migration plan. To recap the key decisions: run REST and GraphQL in parallel during migration, define the schema in schema.graphql with clean enum types to abstract the OrderStatus integer change, use DataLoader for efficient data fetching, add query depth and complexity limits, and remove /api/v1/legacy-search as part of this effort. Good luck with the migration!"
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What are the three current REST API endpoints being migrated to GraphQL?",
+      "expectedAnswer": "/api/v2/users, /api/v2/orders, and /api/v2/products",
+      "expectedEntities": ["/api/v2/users", "/api/v2/orders", "/api/v2/products"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What legacy endpoint is being deprecated and removed during the migration?",
+      "expectedAnswer": "/api/v1/legacy-search",
+      "expectedEntities": ["/api/v1/legacy-search"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What was the breaking change related to the OrderStatus enum?",
+      "expectedAnswer": "OrderStatus changed from strings to integers",
+      "expectedEntities": ["OrderStatus", "strings", "integers"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What were the OrderStatus enum values and their integer mappings?",
+      "expectedAnswer": "PENDING=0, PROCESSING=1, SHIPPED=2, DELIVERED=3, CANCELLED=4",
+      "expectedEntities": ["PENDING", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELLED"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What library was recommended to prevent deeply nested GraphQL queries?",
+      "expectedAnswer": "graphql-depth-limit",
+      "expectedEntities": ["graphql-depth-limit"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

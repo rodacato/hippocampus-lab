@@ -1,0 +1,159 @@
+{
+  "id": "technical-09",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I need help with our Kubernetes deployment. We have a deployment called api-gateway in the production namespace and it runs 3 replicas.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Got it, api-gateway with 3 replicas in production. What issue are you running into with the deployment?"
+    },
+    {
+      "role": "user",
+      "content": "The pods keep crashing. When I run kubectl describe pod I see the last state is OOMKilled. The current resource limits are set to 512Mi memory and 250m CPU.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "OOMKilled means the pod is exceeding its 512Mi memory limit and the kernel is killing it. You need to either optimize the application's memory usage or increase the memory limit. What kind of application is this and what does its memory usage pattern look like?"
+    },
+    {
+      "role": "user",
+      "content": "It's a Node.js API gateway that proxies requests to about 8 downstream microservices. During peak traffic the memory usage spikes because of connection pooling and request buffering.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Node.js with connection pooling to 8 services will definitely consume more than 512Mi under load. For an API gateway handling that many downstream connections, I'd recommend increasing the memory limit. What does your peak memory look like in monitoring?"
+    },
+    {
+      "role": "user",
+      "content": "Our Prometheus metrics show the memory peaks at around 780Mi during traffic spikes. So I think we need to bump the limit to at least 1Gi to have some headroom.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "1Gi is a good target. That gives you about 25% headroom above the 780Mi peak, which is reasonable. You should also set the memory request to something like 768Mi so the scheduler places pods on nodes with enough capacity."
+    },
+    {
+      "role": "user",
+      "content": "Makes sense. We manage our deployments using Helm charts. The current chart version is 2.4.1. Should I update the values.yaml or the deployment template directly?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Always update the values.yaml rather than modifying the templates directly. That keeps your configuration separate from the chart logic and makes upgrades easier. Update the resources section in values.yaml with the new limits."
+    },
+    {
+      "role": "user",
+      "content": "Got it. I updated values.yaml with memory limit 1Gi and request 768Mi. Should I also adjust the CPU limits? Current is 250m.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "For an API gateway doing mostly I/O, 250m CPU should be adequate. CPU throttling is less destructive than OOMKill since it just slows the process down. I'd keep 250m for now and only increase it if you see high CPU throttling in your metrics."
+    },
+    {
+      "role": "user",
+      "content": "OK I'll keep CPU at 250m. I'm about to do a helm upgrade. Should I do a rolling update or recreate the pods all at once?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Use a rolling update strategy. Since you have 3 replicas, configure maxUnavailable: 1 and maxSurge: 1 so at least 2 pods are always serving traffic during the upgrade. This gives you zero-downtime deployment."
+    },
+    {
+      "role": "user",
+      "content": "Done. I ran helm upgrade api-gateway ./chart -n production -f values.yaml and the pods are rolling out now. I can see 2 old pods and 1 new pod running.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Good, the rolling update is progressing as expected. Monitor the new pod with kubectl logs and kubectl top pod to verify the memory limit change took effect. Once all 3 replicas are replaced, keep an eye on the OOMKilled events. They should stop now with the 1Gi limit."
+    },
+    {
+      "role": "user",
+      "content": "All 3 new pods are running and healthy. The memory usage is sitting at about 420Mi at baseline. Looks like the 1Gi limit gives us plenty of room. Thanks!",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "420Mi baseline with a 1Gi limit is a comfortable margin. That gives you over 50% headroom for traffic spikes. I'd recommend setting up a Prometheus alert for when memory usage exceeds 80% of the limit so you get early warning before any future OOMKill events."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the deployment name, namespace, and replica count?",
+      "expectedAnswer": "The api-gateway deployment in the production namespace with 3 replicas",
+      "expectedEntities": ["api-gateway", "production", "3 replicas"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What were the original resource limits and what error were the pods experiencing?",
+      "expectedAnswer": "512Mi memory and 250m CPU limits, pods were getting OOMKilled",
+      "expectedEntities": ["512Mi", "250m", "OOMKilled"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What was the new memory limit set to and why?",
+      "expectedAnswer": "Increased to 1Gi because Prometheus showed peak memory at 780Mi",
+      "expectedEntities": ["1Gi", "780Mi"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What Helm chart version is being used for the deployment?",
+      "expectedAnswer": "Helm chart version 2.4.1",
+      "expectedEntities": ["2.4.1"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What is the baseline memory usage of the new pods after the upgrade?",
+      "expectedAnswer": "About 420Mi at baseline",
+      "expectedEntities": ["420Mi"],
+      "infoLocation": "recent",
+      "salienceLevel": "low"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "id": "technical-07",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I'm setting up OAuth authentication for our app called TaskFlow. We've decided to go with Auth0 as the provider.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Auth0 is a solid choice for OAuth. Let's walk through the setup. First, you'll need to create an application in the Auth0 dashboard. Have you already done that, or are you starting from scratch?"
+    },
+    {
+      "role": "user",
+      "content": "I already created the application. The client ID starts with a0-prod- and I have the client secret stored in our vault. The full client ID is a0-prod-7xk9m2nq.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Good, you've got the credentials set up. Next we need to configure the redirect URLs. These tell Auth0 where to send users after they authenticate. What domains will your app be running on?"
+    },
+    {
+      "role": "user",
+      "content": "The production URL is https://app.taskflow.io/callback and for local development we use http://localhost:3000/callback. Both need to be in the allowed callback list.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect. Add both URLs to the Allowed Callback URLs field in your Auth0 application settings. Make sure to also add the corresponding logout URLs if you want proper sign-out redirect behavior."
+    },
+    {
+      "role": "user",
+      "content": "Done. Now for token configuration, we want the access token to expire after 3600 seconds, so that's 1 hour. Is that reasonable?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "One hour is a common and reasonable expiry for access tokens. It balances security with user experience. You'll want to implement a refresh token flow so users don't have to re-authenticate every hour. Auth0 supports rotating refresh tokens which adds an extra layer of security."
+    },
+    {
+      "role": "user",
+      "content": "Makes sense. What grant types should I enable? We have a React single-page app and also a backend API.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "For the React SPA, use the Authorization Code flow with PKCE. This is the recommended flow for public clients. For your backend API, if it needs machine-to-machine communication, enable the Client Credentials grant. Don't use the Implicit flow since it's considered less secure."
+    },
+    {
+      "role": "user",
+      "content": "Got it. I'm implementing the login in React now. Should I use the Auth0 React SDK or build the OAuth flow manually?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Use the Auth0 React SDK, specifically the @auth0/auth0-react package. It handles the PKCE flow, token management, and session persistence automatically. Building it manually is error-prone and you'd essentially be reimplementing what the SDK already does well."
+    },
+    {
+      "role": "user",
+      "content": "I installed the SDK and wrapped my app with Auth0Provider. Now I need to protect certain routes. We want /dashboard and /settings to require authentication but /pricing and /about should be public.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Create a ProtectedRoute wrapper component that uses the useAuth0 hook to check isAuthenticated. Wrap your /dashboard and /settings routes with it. If the user isn't authenticated, redirect them to the login page using loginWithRedirect. Leave /pricing and /about as regular routes."
+    },
+    {
+      "role": "user",
+      "content": "One more thing. We also need to add social login with Google and GitHub. Is that configured in Auth0 or in our code?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's configured entirely in Auth0's dashboard under Authentication > Social. Enable the Google and GitHub connections there, provide the OAuth credentials from each provider, and they'll automatically appear on your Auth0 login page. No code changes needed on your side since the SDK just redirects to Auth0's universal login."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the name of the application being built and what OAuth provider is being used?",
+      "expectedAnswer": "The application is called TaskFlow and uses Auth0 as the OAuth provider",
+      "expectedEntities": ["TaskFlow", "Auth0"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the client ID and what pattern does it follow?",
+      "expectedAnswer": "The client ID is a0-prod-7xk9m2nq, following the pattern of starting with a0-prod-",
+      "expectedEntities": ["a0-prod-7xk9m2nq", "a0-prod-"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What are the two redirect callback URLs configured?",
+      "expectedAnswer": "https://app.taskflow.io/callback for production and http://localhost:3000/callback for local development",
+      "expectedEntities": ["https://app.taskflow.io/callback", "http://localhost:3000/callback"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the token expiry time?",
+      "expectedAnswer": "3600 seconds, which is 1 hour",
+      "expectedEntities": ["3600 seconds", "1 hour"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "Which routes require authentication and which are public?",
+      "expectedAnswer": "/dashboard and /settings require authentication while /pricing and /about are public",
+      "expectedEntities": ["/dashboard", "/settings", "/pricing", "/about"],
+      "infoLocation": "recent",
+      "salienceLevel": "low"
+    }
+  ]
+}

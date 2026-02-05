@@ -1,0 +1,159 @@
+{
+  "id": "technical-03",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I need help setting up a CI/CD pipeline using GitHub Actions for our Node.js project. The main production branch is main and we use develop as our staging branch.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Happy to help with that. GitHub Actions is a good choice for Node.js projects. Before we dive in, can you tell me what your deployment target is? That'll shape how we structure the workflow."
+    },
+    {
+      "role": "user",
+      "content": "We deploy to an AWS ECS cluster called prod-cluster. We already have Docker images building and pushed to ECR, but the CI and deployment steps aren't automated yet.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Got it. So we need a workflow that runs tests on PRs, and then handles deployment to ECS on merges. For ECS deployments from GitHub Actions, you'll typically use the aws-actions/amazon-ecs-deploy-task-definition action. Let's start with the test workflow. What's your test command?"
+    },
+    {
+      "role": "user",
+      "content": "The test command is npm run test:ci which runs Jest with coverage reporting. We also run ESLint as a separate step.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Good, let's structure it cleanly. I'd create two workflow files: one for CI that runs on all pull requests, and one for deployment that runs on pushes to main and develop. The CI workflow would have two jobs: lint and test running in parallel. The test job runs npm run test:ci and uploads coverage. Sound good?"
+    },
+    {
+      "role": "user",
+      "content": "That sounds right. For the deployment workflow, we use an IAM role for authentication. The role ARN is stored in GitHub secrets as AWS_DEPLOY_ROLE_ARN. We use OIDC federation, not access keys.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "OIDC federation is the recommended approach - much more secure than long-lived access keys. For that, you'll use the aws-actions/configure-aws-credentials action with the role-to-assume parameter set to your secret. The workflow step would look like:\n\n- uses: aws-actions/configure-aws-credentials@v4\n  with:\n    role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}\n    aws-region: us-east-1\n\nMake sure your GitHub OIDC provider is configured in your AWS account's IAM settings."
+    },
+    {
+      "role": "user",
+      "content": "Yes, the OIDC provider is already set up in AWS. Now, should the deployment to prod-cluster happen automatically on merge to main, or should we add a manual approval step?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "For production deployments, I'd strongly recommend a manual approval step. You can use GitHub Environments for this. Create a 'production' environment with required reviewers, and reference it in the deploy job. For the develop branch deploying to staging, automatic deployment is usually fine. That way, merges to develop auto-deploy to staging for testing, but merges to main require someone to click approve before going to prod-cluster."
+    },
+    {
+      "role": "user",
+      "content": "Makes sense. Let's do automatic for staging and manual approval for production. Can we also add a Slack notification when deployments succeed or fail?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely. You can use the slackapi/slack-github-action for that. Add it as a final step in the deploy job with an if: always() condition so it fires on both success and failure. You'll need a Slack webhook URL stored as a secret. The notification can include the commit SHA, branch name, and deployment status. I'd add it to both the staging and production deploy jobs."
+    },
+    {
+      "role": "user",
+      "content": "Good idea. One more thing - we want to run the tests on Node 18 and Node 20 using a matrix strategy, since we're planning to upgrade soon. Is that straightforward?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Very straightforward with GitHub Actions matrix strategy. In your CI workflow, add:\n\nstrategy:\n  matrix:\n    node-version: [18, 20]\n\nThen use ${{ matrix.node-version }} in the setup-node step. This will run your npm run test:ci and lint jobs against both Node versions in parallel. It's a great way to validate the upgrade path before committing to it."
+    },
+    {
+      "role": "user",
+      "content": "Perfect. Should we cache node_modules between runs to speed things up?",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Definitely. Use the actions/cache action to cache your node_modules directory keyed on the hash of package-lock.json. Actually, even simpler - the actions/setup-node action has a built-in cache option. Just add cache: 'npm' to your setup-node step and it handles everything. This can cut your install time from minutes to seconds on cache hits."
+    },
+    {
+      "role": "user",
+      "content": "Awesome. I think I have everything I need to write the workflow files. Let me summarize: CI runs lint and npm run test:ci on PRs with a Node matrix, deploy auto-triggers for develop to staging, and requires manual approval for main to prod-cluster.",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a solid summary. Just remember a few key details: use OIDC via the AWS_DEPLOY_ROLE_ARN secret for AWS authentication, add the Slack notification step with if: always(), and set up the 'production' GitHub Environment with required reviewers for the manual approval gate. Your pipeline will be well-structured and secure. Let me know if you need help with the actual YAML syntax."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What are the two main branches used and what does each one map to?",
+      "expectedAnswer": "main is the production branch and develop is the staging branch",
+      "expectedEntities": ["main", "develop"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the name of the AWS ECS cluster used for deployment?",
+      "expectedAnswer": "prod-cluster",
+      "expectedEntities": ["prod-cluster", "AWS ECS"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the test command used in the CI pipeline?",
+      "expectedAnswer": "npm run test:ci",
+      "expectedEntities": ["npm run test:ci"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What GitHub secret stores the AWS IAM role ARN for deployment?",
+      "expectedAnswer": "AWS_DEPLOY_ROLE_ARN",
+      "expectedEntities": ["AWS_DEPLOY_ROLE_ARN", "OIDC"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What Node.js versions are tested using the matrix strategy?",
+      "expectedAnswer": "Node 18 and Node 20",
+      "expectedEntities": ["18", "20"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

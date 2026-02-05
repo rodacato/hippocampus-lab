@@ -1,0 +1,146 @@
+{
+  "id": "technical-08",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I'm having CSS layout issues with a component called ProductCard. It breaks when the viewport goes below 768px. We're using Next.js with Tailwind CSS.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Responsive breakpoints at 768px are a common pain point. Can you share the CSS Grid or Flexbox setup you're using for the ProductCard layout? That will help pinpoint why it breaks at that width."
+    },
+    {
+      "role": "user",
+      "content": "The parent container uses CSS Grid with grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) to lay out the cards. Below 768px the cards overflow and get cut off.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "The problem is that minmax(280px, 1fr) means each card demands at least 280px. On a viewport below 768px with padding and gaps, you can't fit even two cards, and if the container is narrower than 280px the card overflows. You need to lower that minimum."
+    },
+    {
+      "role": "user",
+      "content": "What value should I change the minmax to? I still want the cards to look decent on small screens.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Change the minimum from 280px to 240px. That gives you more room on smaller viewports while keeping the cards wide enough to display content properly. The grid will still scale up to 1fr on larger screens."
+    },
+    {
+      "role": "user",
+      "content": "OK so minmax(240px, 1fr) then. But what about really small screens like phones? Below 480px even 240px might be tight with padding.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Add a media query at 480px that switches the grid to a single column layout. Something like grid-template-columns: 1fr. That way on very small screens each card takes the full width, and you avoid any overflow issues."
+    },
+    {
+      "role": "user",
+      "content": "That makes sense. I'll add the media query at 480px. There's also another issue I've been dealing with. Our NavBar header component has a z-index conflict. It's set to z-index 999 but it still appears behind some modal overlays.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "The z-index issue is likely caused by stacking contexts. Even if NavBar is set to 999, if it's inside a parent with a lower stacking context, the modal can still appear on top. Check if any parent element of NavBar has a transform, opacity less than 1, or a z-index that creates a new stacking context."
+    },
+    {
+      "role": "user",
+      "content": "You're right, the main layout wrapper has transform: translateZ(0) on it as a GPU acceleration hack. That must be creating the stacking context issue.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Exactly. translateZ(0) creates a new stacking context, trapping NavBar's z-index inside it. Remove that transform from the layout wrapper. If you need GPU acceleration for specific animations, apply it only to the elements that need it rather than a global wrapper."
+    },
+    {
+      "role": "user",
+      "content": "Fixed that. Now the NavBar stays on top correctly. One more question, should I be using Tailwind's responsive prefixes like md: and sm: instead of writing raw media queries since we're already using Tailwind?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Yes, since you're using Tailwind CSS with Next.js, you should prefer Tailwind's responsive utilities. For your grid fix, you could write something like grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 instead of custom media queries. It keeps your styling consistent and leverages Tailwind's built-in breakpoints."
+    },
+    {
+      "role": "user",
+      "content": "Good point. I'll refactor the grid to use Tailwind classes instead of the raw CSS Grid declaration. Thanks for the help.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Sounds good. To summarize the changes: lower the minmax minimum to 240px, add a breakpoint at 480px for single-column layout, and remove the translateZ(0) from the layout wrapper. Refactoring to Tailwind responsive classes is also a great idea for long-term maintainability."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the name of the component with layout issues and at what viewport width does it break?",
+      "expectedAnswer": "The ProductCard component breaks at viewport below 768px",
+      "expectedEntities": ["ProductCard", "768px"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What CSS Grid declaration was originally used for the card layout?",
+      "expectedAnswer": "grid-template-columns: repeat(auto-fill, minmax(280px, 1fr))",
+      "expectedEntities": ["repeat(auto-fill, minmax(280px, 1fr))"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What was the fix for the grid layout, specifically the new minmax value and the media query breakpoint?",
+      "expectedAnswer": "Change minmax to 240px and add a media query at 480px for single-column layout",
+      "expectedEntities": ["240px", "480px"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What component has a z-index conflict and what is its z-index value?",
+      "expectedAnswer": "The NavBar header component has z-index 999",
+      "expectedEntities": ["NavBar", "999"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What framework and CSS tool are being used for the project?",
+      "expectedAnswer": "Next.js with Tailwind CSS",
+      "expectedEntities": ["Next.js", "Tailwind CSS"],
+      "infoLocation": "recent",
+      "salienceLevel": "low"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "id": "technical-01",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hey, I'm trying to deploy an nginx reverse proxy using Docker on our staging server at staging.acmecorp.io and I'm hitting an error. The container won't start.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a common issue with Docker deployments. Can you share the exact error message you're seeing when you try to start the container? Also, what command are you using to run it?"
+    },
+    {
+      "role": "user",
+      "content": "I'm running: docker run -d --name web-proxy -p 8443:443 nginx:1.25-alpine and the error is \"bind: address already in use\" on port 8443.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "The error \"bind: address already in use\" means something else on the host machine is already listening on port 8443. Let's figure out what process is occupying that port. Can you run: sudo lsof -i :8443 or sudo ss -tlnp | grep 8443 and share the output?"
+    },
+    {
+      "role": "user",
+      "content": "Okay, I ran lsof and it shows that haproxy is listening on port 8443. PID is 2847. I didn't realize we had haproxy running on this box.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That explains it. The haproxy process is binding to port 8443 which conflicts with your Docker port mapping. You have a couple of options: stop haproxy if it's not needed, change the Docker port mapping to a different host port, or reconfigure haproxy to use a different port. What's the role of haproxy on this server?"
+    },
+    {
+      "role": "user",
+      "content": "I checked with the team and haproxy was left over from an old load balancer setup. It's not needed anymore. I can safely stop it.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Great. Go ahead and stop haproxy with: sudo systemctl stop haproxy and then disable it so it doesn't start on reboot: sudo systemctl disable haproxy. After that, verify port 8443 is free with lsof again, then retry your docker run command."
+    },
+    {
+      "role": "user",
+      "content": "I stopped haproxy and confirmed port 8443 is free. But now when I run the docker run command again, it says the container name web-proxy is already in use by a stopped container.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's because the previous failed attempt created a stopped container with the same name. You need to remove the old container first. Run: docker rm web-proxy and then retry your docker run command. Alternatively, you can use docker rm -f web-proxy to force remove it even if it's somehow still running."
+    },
+    {
+      "role": "user",
+      "content": "Okay, removed the old container and re-ran the command. The container is up now! But I also need to set up SSL termination. I have the certs at /etc/ssl/acmecorp/ on the host.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Nice, the container is running. For SSL termination with nginx, you'll want to mount the certificate directory into the container. Stop the current container and re-run with a volume mount: docker run -d --name web-proxy -p 8443:443 -v /etc/ssl/acmecorp:/etc/nginx/ssl:ro nginx:1.25-alpine. The :ro flag makes it read-only inside the container for security. Then you'll need a custom nginx config that references those certs."
+    },
+    {
+      "role": "user",
+      "content": "Perfect. One last thing - I want to make sure this container restarts automatically if the server reboots. What's the best restart policy?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Add --restart unless-stopped to your docker run command. This will automatically restart the container after a reboot or if it crashes, but it won't restart if you manually stop it. Your final command would be: docker run -d --name web-proxy --restart unless-stopped -p 8443:443 -v /etc/ssl/acmecorp:/etc/nginx/ssl:ro nginx:1.25-alpine. That should give you a solid setup on staging.acmecorp.io."
+    },
+    {
+      "role": "user",
+      "content": "Great, that all works now. Thanks for the help troubleshooting this!",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "You're welcome! To summarize what we did: identified the port conflict with haproxy on 8443, stopped and disabled haproxy, cleaned up the old Docker container, and got the nginx reverse proxy running with SSL support and an automatic restart policy. If you run into any issues with the nginx SSL configuration, feel free to ask."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What was the staging server hostname where the Docker deployment was happening?",
+      "expectedAnswer": "staging.acmecorp.io",
+      "expectedEntities": ["staging.acmecorp.io"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What was the exact error message when trying to start the Docker container?",
+      "expectedAnswer": "bind: address already in use",
+      "expectedEntities": ["bind: address already in use", "8443"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What process was conflicting with the Docker container on port 8443?",
+      "expectedAnswer": "haproxy was listening on port 8443",
+      "expectedEntities": ["haproxy", "8443"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Why was haproxy running on the staging server?",
+      "expectedAnswer": "It was left over from an old load balancer setup and was no longer needed",
+      "expectedEntities": ["haproxy", "load balancer"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "Where were the SSL certificates stored on the host machine?",
+      "expectedAnswer": "/etc/ssl/acmecorp/",
+      "expectedEntities": ["/etc/ssl/acmecorp"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}
