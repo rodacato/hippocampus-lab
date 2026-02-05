@@ -8,11 +8,15 @@
     "experiment:eval": "npx tsx src/runner.ts evaluate",
     "experiment:report": "npx tsx src/runner.ts report",
     "validate:datasets": "npx tsx src/datasets/loader.ts --validate",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "tsx": "^4.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^4.0.18"
   }
 }
