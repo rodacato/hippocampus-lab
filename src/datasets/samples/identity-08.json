@@ -1,0 +1,146 @@
+{
+  "id": "identity-08",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hey, I need help figuring out how to balance my time better. I'm Tomás Herrera, and I've got way too much going on right now.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hi Tomás! I'm happy to help you think through your schedule. What are the main things competing for your time?"
+    },
+    {
+      "role": "user",
+      "content": "So my day job is as an accountant at Deloitte. That's the thing that pays the bills. But my real passion is music — I play bass guitar in a band called Electric Llamas.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "The classic day-job-plus-creative-passion juggle. What kind of music does Electric Llamas play?"
+    },
+    {
+      "role": "user",
+      "content": "We're indie rock, kind of in the vein of Modest Mouse meets Arctic Monkeys. We've been together for about three years now. There are four of us in the band.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Nice sound to aim for. Three years is solid — that means you've gotten past the early phase where most bands fall apart. What's making the time crunch worse lately?"
+    },
+    {
+      "role": "user",
+      "content": "It's tax season at work, so I'm pulling long hours at Deloitte. But we also have a gig coming up next Saturday at The Basement, and we're not as rehearsed as I'd like.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Tax season and a gig at the same time — that's a tough overlap. How many times a week does the band usually rehearse?"
+    },
+    {
+      "role": "user",
+      "content": "Normally twice a week, Tuesday and Thursday evenings. But the last two weeks I've only made it to one rehearsal each week because of late nights at the office.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Missing half your rehearsals right before a show is stressful. Have you talked to the rest of the band about this?"
+    },
+    {
+      "role": "user",
+      "content": "Yeah, they get it, mostly. Our lead singer Priya has been pretty understanding. But our drummer Jake is frustrated because we're playing three new songs at The Basement that we haven't nailed down yet.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Jake's frustration makes sense — drums and bass need to be really locked in together. Could you and Jake do a separate mini-rehearsal to tighten up the rhythm section on those new songs?"
+    },
+    {
+      "role": "user",
+      "content": "That's actually a great idea. Maybe we could do a Sunday afternoon session, just the two of us. I could practice the bass parts at home with headphones during the week too.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Solo practice with headphones is perfect for bass — you can run through the tricky sections without needing the full band. For the Sunday session with Jake, I'd focus exclusively on the three new songs. Is there a longer-term concern here too, or is this mainly a tax season crunch?"
+    },
+    {
+      "role": "user",
+      "content": "Honestly, I've been thinking about it long term. Deloitte is a good job with great pay, but I sometimes wonder if I should go part-time and give the band a real shot. We've been getting more attention lately, and a local label reached out last month.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a significant decision, and the label interest makes it more real. Before making any big moves, you might want to set a concrete timeline — say, six months — to see if the band momentum keeps growing. That way you can make the part-time decision with more data rather than on impulse during a stressful week."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the user's name and what instrument does he play?",
+      "expectedAnswer": "Tomás Herrera, he plays bass guitar",
+      "expectedEntities": ["Tomás Herrera", "bass guitar"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is Tomás's day job and where does he work?",
+      "expectedAnswer": "He is an accountant at Deloitte",
+      "expectedEntities": ["accountant", "Deloitte"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the name of Tomás's band and what genre do they play?",
+      "expectedAnswer": "Electric Llamas, they play indie rock",
+      "expectedEntities": ["Electric Llamas", "indie rock"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Where is the band's upcoming gig and when is it?",
+      "expectedAnswer": "At The Basement, next Saturday",
+      "expectedEntities": ["The Basement", "Saturday"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What long-term career change is Tomás considering?",
+      "expectedAnswer": "Going part-time at Deloitte to focus more on the band, especially since a local label reached out",
+      "expectedEntities": ["part-time", "label"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
+    }
+  ]
+}

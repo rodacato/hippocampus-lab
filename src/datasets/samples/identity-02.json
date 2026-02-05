@@ -1,0 +1,146 @@
+{
+  "id": "identity-02",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hi there! My name is James Liu and I'm looking for some advice on switching careers.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hi James! I'd be happy to help you think through a career change. What are you currently doing, and what direction are you considering?"
+    },
+    {
+      "role": "user",
+      "content": "I'm 34 and I've been teaching high school chemistry in Portland for the past eight years. I enjoy it, but I feel like I've hit a ceiling.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Eight years is a solid stretch, so you definitely know whether the classroom is still the right fit. What kind of ceiling are you feeling — is it more about compensation, intellectual challenge, or growth opportunities?"
+    },
+    {
+      "role": "user",
+      "content": "Honestly, a bit of all three. I love problem-solving and working with data, which is why I've been looking into data science as a new path.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That makes a lot of sense. Your chemistry background actually gives you a strong foundation in analytical thinking and experimental design, which translate well to data science. Have you started learning any of the core skills yet?"
+    },
+    {
+      "role": "user",
+      "content": "Yes! I'm currently taking two courses on Coursera — one on Python programming and another on statistics for data science. I try to study about an hour every evening after grading.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a great combo to start with. Python and statistics are really the two pillars you need before diving into machine learning or specialized tools. How are you finding the coursework so far?"
+    },
+    {
+      "role": "user",
+      "content": "The Python course has been surprisingly fun. I actually built a small script to automate my grade calculations, which saved me a ton of time. The statistics course is tougher, but I like the rigor.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Automating your own workflow is a fantastic sign — that's exactly the kind of practical problem-solving data science roles demand. Have you thought about what kind of data science work interests you most? There's a wide range, from analytics to machine learning engineering."
+    },
+    {
+      "role": "user",
+      "content": "I think I'm most drawn to analytics and visualization. I like the idea of finding patterns in data and presenting insights clearly. I guess my teaching background helps with the communication side.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely. Being able to explain complex findings to non-technical audiences is one of the most underrated skills in data science, and teachers tend to excel at that. Do you have a timeline or target for making the switch?"
+    },
+    {
+      "role": "user",
+      "content": "I do, actually. There's a company called Dataworks Inc that has an entry-level data analyst opening. I want to have my application ready by March.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a concrete goal, which is great. March gives you a few months to build up your portfolio. I'd suggest working on two or three small projects you can showcase — maybe one involving educational data, since that ties your experience together nicely."
+    },
+    {
+      "role": "user",
+      "content": "That's a really good idea. I actually have access to anonymized student performance data from my school district. I could do an analysis on factors that predict student success.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That would be a compelling portfolio piece — it shows domain expertise, analytical skills, and real-world impact all at once. If you can visualize the findings with something like matplotlib or Tableau, that would really round it out."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the name and age of the person you are talking to?",
+      "expectedAnswer": "James Liu, 34 years old",
+      "expectedEntities": ["James", "Liu", "34"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is his current job and where does he work?",
+      "expectedAnswer": "He is a high school chemistry teacher in Portland",
+      "expectedEntities": ["high school", "chemistry", "teacher", "Portland"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What online courses is James taking and on which platform?",
+      "expectedAnswer": "Python programming and statistics for data science on Coursera",
+      "expectedEntities": ["Python", "statistics", "Coursera"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What area of data science is James most interested in?",
+      "expectedAnswer": "Analytics and visualization",
+      "expectedEntities": ["analytics", "visualization"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What company does James want to apply to and by when?",
+      "expectedAnswer": "Dataworks Inc by March",
+      "expectedEntities": ["Dataworks Inc", "March"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
+    }
+  ]
+}

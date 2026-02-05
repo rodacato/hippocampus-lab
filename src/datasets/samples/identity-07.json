@@ -1,0 +1,146 @@
+{
+  "id": "identity-07",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hey, I'm Amara Okafor and I'm working on my pitch deck for an investor meeting next week. Could you help me tighten up the messaging?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hi Amara! I'd be happy to help with your pitch deck. Can you tell me about your startup and what problem you're solving?"
+    },
+    {
+      "role": "user",
+      "content": "Sure. The company is called GreenRoute. We're building a sustainable logistics platform focused on last-mile delivery in African cities. Think optimized routing that cuts emissions and costs at the same time.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "GreenRoute sounds like it's addressing a real gap. Last-mile delivery in African cities has unique challenges — traffic patterns, infrastructure variability, rapid urbanization. How does your platform handle those?"
+    },
+    {
+      "role": "user",
+      "content": "We use real-time data from local partners — traffic sensors, weather feeds, even crowdsourced road condition reports. Our algorithm adapts routes dynamically. My co-founder Marcus Webb built the core routing engine. He handles the tech side while I focus on business and partnerships.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Having a strong technical co-founder is a big plus for investors. What's Marcus's background?"
+    },
+    {
+      "role": "user",
+      "content": "He was a senior engineer at Uber for four years, working on their routing systems. That's actually how we came up with the idea — he kept saying the same optimization approaches could work even better in markets where the infrastructure is less predictable.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a compelling origin story. Investors love founder-market fit, and Marcus having direct routing experience from Uber is strong. What stage are you at right now?"
+    },
+    {
+      "role": "user",
+      "content": "We're currently in the Y Combinator batch, which has been intense but amazing. We raised $500K in a pre-seed round before getting into YC. Now we're gearing up for our seed round.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Being in YC is a strong signal on its own. With $500K pre-seed already raised, you've got early validation. What traction metrics do you have so far?"
+    },
+    {
+      "role": "user",
+      "content": "We're piloting in Lagos and Nairobi right now. We have 12 delivery fleet partners signed up, handling about 3,000 deliveries per week combined. Our platform has reduced average delivery times by 22% in the pilot.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Those are solid early numbers. A 22% reduction in delivery times is a concrete, measurable result. Are you planning to expand to more cities after the seed round?"
+    },
+    {
+      "role": "user",
+      "content": "Yes, the plan is to expand to Accra and Dar es Salaam next. We want to be in five cities by end of next year. The seed round target is $3 million.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's an ambitious but reasonable expansion plan. For the pitch deck, I'd suggest leading with the traction data, then the market opportunity, followed by the team slide. Investors at seed stage want to see momentum."
+    },
+    {
+      "role": "user",
+      "content": "That makes sense. Right now I have the team slide first, then the problem, then the solution. Should I restructure it to lead with the numbers instead?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "I'd recommend this order: hook with a compelling stat (the 22% improvement), then the problem, solution, traction deep-dive, market size, team, and finally the ask. Leading with proof grabs attention immediately and makes everything else more credible."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the user's name and what is her startup called?",
+      "expectedAnswer": "Amara Okafor, and the startup is called GreenRoute",
+      "expectedEntities": ["Amara Okafor", "GreenRoute"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Who is Amara's co-founder and what does he handle?",
+      "expectedAnswer": "Marcus Webb, he handles the tech side",
+      "expectedEntities": ["Marcus Webb", "tech"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What accelerator is GreenRoute in, and how much pre-seed funding did they raise?",
+      "expectedAnswer": "Y Combinator, and they raised $500K pre-seed",
+      "expectedEntities": ["Y Combinator", "$500K", "pre-seed"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is GreenRoute's target market?",
+      "expectedAnswer": "Last-mile delivery in African cities",
+      "expectedEntities": ["last-mile delivery", "African cities"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Which cities is GreenRoute planning to expand to next?",
+      "expectedAnswer": "Accra and Dar es Salaam",
+      "expectedEntities": ["Accra", "Dar es Salaam"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

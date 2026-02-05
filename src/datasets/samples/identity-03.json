@@ -1,0 +1,146 @@
+{
+  "id": "identity-03",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hello! I'm Sofia Andersson. I'm a medical student and I have some questions about managing a heavy study schedule.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hi Sofia! Medical school is definitely demanding. I'd love to help — what year are you in, and what are you finding most challenging right now?"
+    },
+    {
+      "role": "user",
+      "content": "I'm in my fourth year at the Karolinska Institute in Stockholm. The clinical rotations have been intense, especially since I'm focusing on pediatric neurology.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Karolinska is one of the top medical schools in the world, so the rigor makes sense. Pediatric neurology is a fascinating but demanding specialty. What's making the rotations particularly tough for you?"
+    },
+    {
+      "role": "user",
+      "content": "It's mostly the emotional side. Working with children who have neurological conditions takes a toll. My mom actually understands this well — she's a nurse, Anna Andersson. She keeps telling me it gets easier with time.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Having a parent in healthcare must be both a blessing and a source of real understanding. She's right that you build emotional resilience over time, but it's important not to just push through — processing those feelings matters. Do you have a support system beyond your mom?"
+    },
+    {
+      "role": "user",
+      "content": "I do. My brother Erik is great to talk to. He's a lawyer, so he's in a completely different world, but he's a really good listener. We try to have dinner together every Sunday.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That weekly dinner with Erik sounds like a valuable ritual. Sometimes having someone outside of medicine to talk to gives you the best perspective. How are you handling the actual study workload alongside rotations?"
+    },
+    {
+      "role": "user",
+      "content": "That's the hard part. I have board exams coming up in four months, and I need to review neuroscience, pharmacology, and pediatrics all at once. I've been using spaced repetition with Anki, but I feel like I'm falling behind.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Anki is excellent for long-term retention, so you're on the right track there. Four months is actually a reasonable window if you structure it well. Are you spacing your review sessions across all three subjects, or are you doing one at a time?"
+    },
+    {
+      "role": "user",
+      "content": "I've been trying to interleave them, but I end up spending most of my time on neuroscience because it's the most complex. Pharmacology and pediatrics keep getting pushed to the weekend.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a common trap — we tend to gravitate toward the subject that feels most urgent. One approach is to time-box each subject: give neuroscience your peak focus hours, but protect at least 30 minutes daily for each of the other two. That way nothing goes stale."
+    },
+    {
+      "role": "user",
+      "content": "That's really practical advice. I also want to start doing some research in pediatric epilepsy. My supervisor Dr. Lindqvist has a project she wants me to join, but I'm worried about overcommitting.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Research experience is important for your specialty, but timing matters. Could you have an honest conversation with Dr. Lindqvist about starting with a limited role — maybe just the literature review portion — until your boards are done?"
+    },
+    {
+      "role": "user",
+      "content": "She's actually very understanding. I think she'd be open to that. I could probably manage five hours a week on the literature review without it affecting my study schedule too much.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Five hours a week sounds sustainable, and a literature review is the perfect low-pressure entry point. It'll also reinforce your neuroscience studying since there's likely significant overlap with pediatric epilepsy. Just be honest with yourself if it starts cutting into your board prep."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the student's name and where does she study?",
+      "expectedAnswer": "Sofia Andersson, at the Karolinska Institute in Stockholm",
+      "expectedEntities": ["Sofia", "Andersson", "Karolinska Institute", "Stockholm"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What medical specialty is she pursuing?",
+      "expectedAnswer": "Pediatric neurology",
+      "expectedEntities": ["pediatric neurology"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What does Sofia's mother do, and what is her name?",
+      "expectedAnswer": "Her mother Anna Andersson is a nurse",
+      "expectedEntities": ["Anna", "nurse"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What is Sofia's brother's name and profession?",
+      "expectedAnswer": "Erik, he is a lawyer",
+      "expectedEntities": ["Erik", "lawyer"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What research topic is Sofia considering, and who is her supervisor?",
+      "expectedAnswer": "Pediatric epilepsy research with Dr. Lindqvist",
+      "expectedEntities": ["pediatric epilepsy", "Dr. Lindqvist"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

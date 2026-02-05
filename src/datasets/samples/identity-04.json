@@ -1,0 +1,146 @@
+{
+  "id": "identity-04",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hey! I'm Diego Morales, a freelance designer based in Mexico City. I'm looking for tips on managing international clients.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hey Diego! Freelance design with international clients is a whole different game. What kind of design work do you do, and where are most of your clients based?"
+    },
+    {
+      "role": "user",
+      "content": "I do UI/UX design and motion graphics. Most of my clients are in the US — startups mostly, a few mid-size companies. I use Figma for interface work and After Effects for animations.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Figma and After Effects is a strong combo — Figma for collaborative design and After Effects for polished motion work. Working with US clients from Mexico City, you're only one or two time zones off, which is a big advantage. What's the biggest challenge you're running into?"
+    },
+    {
+      "role": "user",
+      "content": "The time zones are actually fine because I prefer working at night. I usually start around 8 PM and work until 3 or 4 AM. It lines up well with West Coast evening hours for async communication.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a clever setup — you get the quiet focus hours at night and your deliverables land in their inbox by morning. As long as the schedule works for your health and lifestyle, that's a real competitive edge. What's the main friction point then?"
+    },
+    {
+      "role": "user",
+      "content": "Pricing and scope creep. I charge $85 per hour, which is fair for the quality I deliver, but some clients push back or try to sneak in extra revisions without adjusting the budget.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "$85 an hour is very reasonable for experienced UI/UX and motion work, especially if your portfolio backs it up. For scope creep, the best defense is a clear contract. Do you define revision rounds and deliverables upfront?"
+    },
+    {
+      "role": "user",
+      "content": "I do, but I'll admit my contracts could be tighter. I usually include two rounds of revisions, but clients interpret that loosely. One client last month turned 'two rounds' into five separate feedback sessions.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a classic issue. One approach is to define a revision round explicitly in the contract — for example, 'one consolidated set of feedback, delivered within 48 hours of the draft.' That way, five scattered emails don't each count as a new round. Have you considered adding a per-revision fee after the included rounds?"
+    },
+    {
+      "role": "user",
+      "content": "I haven't, but that's a great idea. I think I'll add something like $50 per additional revision round. On a completely different note, I've been thinking about getting into 3D design. A lot of clients are asking for it.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "3D is definitely where a lot of product and marketing design is heading. Blender is free and incredibly powerful if you want to start learning. It pairs well with your After Effects skills for rendering and compositing. Are you thinking product visualization, or more 3D for UI?"
+    },
+    {
+      "role": "user",
+      "content": "Probably product visualization to start. But right now I need to wrap up my current sprint. Oh, and I need to step away for a bit to walk my dog Luna. She's a rescue and gets anxious if I skip her late-night walk.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Go take care of Luna! Rescue dogs really do thrive on routine. A walk is also a great way to clear your head before the next stretch of work. We can pick this up whenever you're back."
+    },
+    {
+      "role": "user",
+      "content": "Thanks! One last thought before I go — I'm also considering raising my rate to $100 for new clients starting next quarter. Do you think that's too aggressive?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Not at all. If you're adding 3D to your skill set and your portfolio supports the jump, a $100 rate is very reasonable for the US market. The key is to grandfather existing clients at the current rate so you don't lose steady work while ramping up. Test it with a few new leads and see how the conversion goes."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the designer's name and where is he based?",
+      "expectedAnswer": "Diego Morales, based in Mexico City",
+      "expectedEntities": ["Diego", "Morales", "Mexico City"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What design tools does Diego primarily use?",
+      "expectedAnswer": "Figma for interface work and After Effects for animations",
+      "expectedEntities": ["Figma", "After Effects"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is Diego's hourly rate and work schedule preference?",
+      "expectedAnswer": "He charges $85 per hour and prefers working at night, usually from 8 PM to 3 or 4 AM",
+      "expectedEntities": ["$85", "night"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Where are most of Diego's clients based?",
+      "expectedAnswer": "Most of his clients are in the US, mostly startups",
+      "expectedEntities": ["US", "startups"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What is the name of Diego's dog, and what new skill is he considering learning?",
+      "expectedAnswer": "His rescue dog is named Luna, and he is considering learning 3D design",
+      "expectedEntities": ["Luna", "rescue", "3D"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

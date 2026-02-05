@@ -16,7 +16,12 @@
     },
     {
       "role": "user",
-      "content": "Principalmente trabajo en sistemas distribuidos y bases de datos."
+      "content": "Principalmente trabajo en sistemas distribuidos y bases de datos. Es lo que más me gusta de mi carrera.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
     },
     {
       "role": "assistant",
@@ -46,23 +51,59 @@
     },
     {
       "role": "assistant",
-      "content": "Barcelona es un gran hub tecnológico. El sector fintech está creciendo mucho ahí."
+      "content": "Barcelona es un gran hub tecnológico. El sector fintech está creciendo mucho ahí. ¿Cuánto tiempo llevas en TechCorp?"
     },
     {
       "role": "user",
-      "content": "Sí, es emocionante. Oye, ¿me puedes recomendar algún libro sobre arquitectura de software?"
+      "content": "Llevo casi 3 años. Empecé como senior developer y ahora soy tech lead del equipo de infraestructura.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "medium"
+      }
     },
     {
       "role": "assistant",
-      "content": "Te recomiendo 'Designing Data-Intensive Applications' de Martin Kleppmann. Es excelente para tu área."
+      "content": "¡Felicidades por el ascenso! Ser tech lead es un gran paso. ¿Cómo ha sido la transición de developer a lead?"
     },
     {
       "role": "user",
-      "content": "Genial, lo buscaré. También me interesa aprender más sobre machine learning."
+      "content": "Ha sido un reto. Ahora paso más tiempo en reuniones y diseño de arquitectura, y menos escribiendo código. Pero me gusta mentorear al equipo.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
     },
     {
       "role": "assistant",
-      "content": "Para ML aplicado a sistemas distribuidos, podrías explorar TensorFlow Serving o MLflow para deployment."
+      "content": "Es normal esa transición. El mentorazgo es una de las partes más gratificantes del liderazgo técnico. ¿Tienes algún interés fuera del trabajo?"
+    },
+    {
+      "role": "user",
+      "content": "Sí, me interesa mucho aprender sobre machine learning. También estoy leyendo Designing Data-Intensive Applications de Martin Kleppmann.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Ese libro es una referencia excelente para tu área. Para ML aplicado a sistemas distribuidos, podrías explorar TensorFlow Serving o MLflow para deployment."
+    },
+    {
+      "role": "user",
+      "content": "Buena idea. Estoy pensando en proponer un proyecto interno en TechCorp para usar ML en detección de fraude.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Eso tiene mucho sentido para una fintech. La detección de fraude con ML es uno de los casos de uso más impactantes en el sector. ¿Ya tienes datos con los que trabajar?"
     }
   ],
   "recallQuestions": [
@@ -74,8 +115,15 @@
       "salienceLevel": "high"
     },
     {
-      "question": "¿En qué empresa trabaja?",
-      "expectedAnswer": "TechCorp",
+      "question": "¿En qué área se especializa?",
+      "expectedAnswer": "Sistemas distribuidos y bases de datos",
+      "expectedEntities": ["sistemas distribuidos", "bases de datos"],
+      "infoLocation": "early",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "¿En qué empresa trabaja y en qué ciudad?",
+      "expectedAnswer": "TechCorp, una startup de fintech en Barcelona",
       "expectedEntities": ["TechCorp", "Barcelona", "fintech"],
       "infoLocation": "middle",
       "salienceLevel": "high"
@@ -83,9 +131,16 @@
     {
       "question": "¿Qué tecnologías usa para su trabajo?",
       "expectedAnswer": "Kubernetes y Apache Kafka",
-      "expectedEntities": ["Kubernetes", "Kafka", "sistemas distribuidos"],
+      "expectedEntities": ["Kubernetes", "Kafka"],
       "infoLocation": "middle",
       "salienceLevel": "medium"
+    },
+    {
+      "question": "¿Qué proyecto interno quiere proponer en su empresa?",
+      "expectedAnswer": "Usar ML en detección de fraude",
+      "expectedEntities": ["ML", "detección de fraude"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
     }
   ]
 }

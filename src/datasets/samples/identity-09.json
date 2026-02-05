@@ -1,0 +1,146 @@
+{
+  "id": "identity-09",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hello! My name is Yuki Tanaka. I moved to Canada six months ago and I still have trouble with some things. Can you help me?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hi Yuki! Of course, I'd be glad to help. What kinds of things are you finding difficult since your move?"
+    },
+    {
+      "role": "user",
+      "content": "I am from Osaka, Japan, and now I live in Toronto. The biggest challenge is my English. I understand most things when I read, but speaking and listening in fast conversations is hard for me.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's completely normal. Reading and listening are different skills, and spoken English in Toronto can be fast with a lot of slang. Are you taking any English classes right now?"
+    },
+    {
+      "role": "user",
+      "content": "Yes, I take English classes three evenings a week at a language school downtown. During the day I work at a Japanese restaurant called Sakura Kitchen. I'm a server there.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Working at a restaurant is actually great for practicing English since you interact with customers all day. How is the job at Sakura Kitchen going?"
+    },
+    {
+      "role": "user",
+      "content": "It's good. The owner is from Kyoto so we speak Japanese together sometimes, which feels like home. But most of the customers speak English, so I get a lot of practice. Some regulars are very patient with me.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Having a boss who speaks your language must be comforting, and the English practice with customers is invaluable. Do you have any bigger goals you're working toward in Canada?"
+    },
+    {
+      "role": "user",
+      "content": "Yes! My dream is to get into the University of Toronto for computer science. I studied programming a little in Osaka and I really love it. But I need to improve my English score first for the admission requirements.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's an excellent goal. U of T has a strong computer science program. Do you know which English proficiency test you need to take — IELTS or TOEFL?"
+    },
+    {
+      "role": "user",
+      "content": "I'm preparing for the IELTS. My language school teacher said I need at least a 6.5 overall score. Right now I think I'm around a 5.5, so I still have work to do.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Going from 5.5 to 6.5 is very achievable, especially since you're immersed in an English-speaking environment. How much time are you giving yourself to prepare?"
+    },
+    {
+      "role": "user",
+      "content": "I want to take the test in about eight months. That would let me apply for the fall intake next year. I also do some coding practice on the side using online tutorials to keep my programming skills fresh.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Eight months is a good timeline. Combining English study with coding practice is smart because a lot of programming resources are in English anyway. What programming languages have you worked with?"
+    },
+    {
+      "role": "user",
+      "content": "Mostly Python and a little bit of JavaScript. I built a small website for Sakura Kitchen as a project to practice both my coding and my English writing. The owner was really happy with it.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a fantastic way to combine your skills. Building a real project for someone is much better practice than just doing exercises. You could even add it to a portfolio when you apply to U of T. Keep up the great work, Yuki."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the user's name and where is she originally from?",
+      "expectedAnswer": "Yuki Tanaka, from Osaka, Japan",
+      "expectedEntities": ["Yuki Tanaka", "Osaka", "Japan"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Where does Yuki currently live and work?",
+      "expectedAnswer": "She lives in Toronto, Canada, and works at a Japanese restaurant called Sakura Kitchen",
+      "expectedEntities": ["Toronto", "Sakura Kitchen"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is Yuki's main academic goal?",
+      "expectedAnswer": "To get into the University of Toronto for computer science",
+      "expectedEntities": ["University of Toronto", "computer science"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What English proficiency test is Yuki preparing for, and what score does she need?",
+      "expectedAnswer": "IELTS, she needs at least a 6.5 overall score",
+      "expectedEntities": ["IELTS", "6.5"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What programming languages does Yuki know, and what project did she build?",
+      "expectedAnswer": "Python and JavaScript. She built a small website for Sakura Kitchen.",
+      "expectedEntities": ["Python", "JavaScript", "Sakura Kitchen"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

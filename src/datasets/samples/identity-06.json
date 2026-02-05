@@ -1,0 +1,146 @@
+{
+  "id": "identity-06",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hi there! My name is Robert Chen, and I'm looking for some advice on picking up new hobbies in retirement.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hello Robert! It's great that you're exploring new hobbies in retirement. What kinds of things have caught your interest so far?"
+    },
+    {
+      "role": "user",
+      "content": "Well, I'm 67 years old and I spent 35 years at Boeing as an aerospace engineer. My whole career was very technical, so now I want to try something more creative.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's an impressive career! After 35 years in aerospace engineering, I can see why you'd want a creative change of pace. Have you already started exploring anything?"
+    },
+    {
+      "role": "user",
+      "content": "Yes, I've started learning watercolor painting. I'm also taking an Italian language course. Both are at the community college near my house.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Watercolor painting and Italian are both wonderful choices. Community college classes are a great way to learn with others too. How are you finding them so far?"
+    },
+    {
+      "role": "user",
+      "content": "The painting class is challenging but fun. I keep trying to be too precise with the brush, which my instructor says is my engineering brain fighting the watercolor.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's actually very common for people with technical backgrounds. Watercolor rewards letting go of control a bit, since the water does a lot of the work. What about the Italian class?"
+    },
+    {
+      "role": "user",
+      "content": "Italian is going pretty well. My wife Linda and I are planning a trip to Tuscany next spring, so that's my motivation. She's the one who suggested I take the class.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "What a lovely goal! Having a trip to Tuscany to look forward to is great motivation for learning the language. Is Linda learning Italian as well?"
+    },
+    {
+      "role": "user",
+      "content": "No, she's been busy with her own thing. She volunteers at the Seattle Public Library three days a week. We've lived in Seattle for over 30 years now.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Seattle is a wonderful city, and it sounds like you've both put down deep roots there. It's nice that Linda stays active with her volunteering too. Do you have any other creative outlets you've been considering?"
+    },
+    {
+      "role": "user",
+      "content": "I've been thinking about joining a woodworking workshop. There's a maker space not far from us in Ballard. But I'm not sure if I'm spreading myself too thin.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "It's smart to think about that. You've got the painting and Italian already filling your schedule, plus the Tuscany trip to prepare for. Maybe you could try one introductory woodworking session before committing to a full class, to see if it sticks?"
+    },
+    {
+      "role": "user",
+      "content": "That's a good idea. I tend to go all-in on everything, which is how I operated at Boeing for decades. I need to remind myself this is supposed to be fun, not another job.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Exactly. Retirement is your chance to explore without pressure. Give yourself permission to try things casually and drop what doesn't bring you joy. You've earned that freedom after a long, accomplished career."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the user's name and age?",
+      "expectedAnswer": "Robert Chen, 67 years old",
+      "expectedEntities": ["Robert Chen", "67"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Where did Robert work before retiring, and for how long?",
+      "expectedAnswer": "He worked at Boeing as an aerospace engineer for 35 years",
+      "expectedEntities": ["Boeing", "aerospace engineer", "35"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What new skills is Robert currently learning?",
+      "expectedAnswer": "Watercolor painting and Italian, both at a community college",
+      "expectedEntities": ["watercolor", "Italian", "community college"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Who is Robert's wife and where do they live?",
+      "expectedAnswer": "His wife is Linda and they live in Seattle",
+      "expectedEntities": ["Linda", "Seattle"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What trip are Robert and Linda planning?",
+      "expectedAnswer": "A trip to Tuscany next spring",
+      "expectedEntities": ["Tuscany"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
+    }
+  ]
+}

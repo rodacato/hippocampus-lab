@@ -1,0 +1,146 @@
+{
+  "id": "identity-10",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hi, I'm Dr. Elena Vasquez. I'm a researcher at MIT and I could use some help brainstorming ideas for a grant proposal I'm writing.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hello Dr. Vasquez! I'd be happy to help with your grant proposal. What field is your research in, and what's the focus of this particular proposal?"
+    },
+    {
+      "role": "user",
+      "content": "My field is computational linguistics. Specifically, I work on cross-lingual transfer learning — figuring out how models trained on high-resource languages can be adapted to work well on low-resource ones.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a critical area, especially given how many of the world's languages are underrepresented in NLP. What's the current state of your research? Have you published recent work in this space?"
+    },
+    {
+      "role": "user",
+      "content": "Yes, I just published a paper called \"Cross-lingual Transfer in Low-Resource Settings\" in ACL 2024. It looked at transfer techniques for Sub-Saharan African languages using a novel alignment approach.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Publishing at ACL is a strong foundation for a grant proposal. You can build directly on those findings. What direction do you want to take the new work?"
+    },
+    {
+      "role": "user",
+      "content": "I want to extend the approach to Southeast Asian languages — specifically Thai, Khmer, and Lao. These languages have unique script systems that make tokenization really challenging. I think our alignment method could be adapted for them.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a natural and compelling extension. The script complexity of those languages is a known bottleneck. Who are you writing this proposal with?"
+    },
+    {
+      "role": "user",
+      "content": "I'm working on it with my colleague Dr. Frank Mueller. He's also at MIT, in the same department. Frank specializes in morphological analysis, which is key for handling the agglutinative properties in some of these languages.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Having a collaborator with morphological expertise is a great complement to your transfer learning work. Which funding agency are you targeting?"
+    },
+    {
+      "role": "user",
+      "content": "We're applying to the NSF. The program is the Linguistics and Human Language Technology track. The deadline is in about ten weeks, so we need to move fast.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Ten weeks is tight but manageable if you have a clear outline. For NSF proposals, the broader impacts section is crucial. How are you planning to frame the societal value?"
+    },
+    {
+      "role": "user",
+      "content": "We're going to emphasize digital inclusion. There are millions of speakers of these languages who essentially can't use modern NLP tools — no decent machine translation, no voice assistants, very limited search. Our work would directly enable those technologies.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Digital inclusion is a very strong angle for NSF. You might also mention potential partnerships with universities or organizations in Thailand, Cambodia, or Laos — that shows real-world engagement beyond the lab."
+    },
+    {
+      "role": "user",
+      "content": "Good point. I actually have a contact at Chulalongkorn University in Bangkok who has been collecting Thai language corpora. I should reach out to her about being an external collaborator on the grant.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That would strengthen the proposal significantly. Having an international collaborator with existing language data shows feasibility and adds credibility. I'd recommend reaching out soon given the ten-week timeline, so you can include a letter of support in the submission."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the researcher's name and where does she work?",
+      "expectedAnswer": "Dr. Elena Vasquez, she works at MIT",
+      "expectedEntities": ["Dr. Elena Vasquez", "MIT"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is Dr. Vasquez's research field and what was her recent publication?",
+      "expectedAnswer": "Computational linguistics. Her recent paper is \"Cross-lingual Transfer in Low-Resource Settings\" published in ACL 2024",
+      "expectedEntities": ["computational linguistics", "Cross-lingual Transfer in Low-Resource Settings", "ACL 2024"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Who is Dr. Vasquez's colleague on the grant proposal and what is his specialty?",
+      "expectedAnswer": "Dr. Frank Mueller, he specializes in morphological analysis",
+      "expectedEntities": ["Dr. Frank Mueller", "morphological analysis"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Which Southeast Asian languages does the new research target?",
+      "expectedAnswer": "Thai, Khmer, and Lao",
+      "expectedEntities": ["Thai", "Khmer", "Lao"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Which funding agency and program are they applying to?",
+      "expectedAnswer": "NSF, the Linguistics and Human Language Technology track",
+      "expectedEntities": ["NSF", "Linguistics and Human Language Technology"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

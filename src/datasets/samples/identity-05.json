@@ -1,0 +1,146 @@
+{
+  "id": "identity-05",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hi, I'm Priya Sharma. I'm a product manager at Zenith Analytics and I've been really struggling with work-life balance lately.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Hi Priya! That's such a common challenge, especially in product management where the boundaries between work and personal time can really blur. What does your situation look like right now?"
+    },
+    {
+      "role": "user",
+      "content": "I work remotely, which is great in theory, but I have two kids — Aarav is 7 and Meera is 4. When I'm home all day, it's hard to separate 'work mode' from 'parent mode.'",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "identity",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's one of the trickiest parts of remote work with young kids. A 7-year-old and a 4-year-old need very different things, too — Aarav is probably in school part of the day, but Meera likely needs more constant attention. Does anyone else help with childcare?"
+    },
+    {
+      "role": "user",
+      "content": "My husband Raj helps when he can, but he works at a hospital so his schedule is pretty unpredictable. Some weeks he's on call and barely home. We have a part-time nanny three days a week for Meera.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a tough combination — your remote work needs predictable blocks of focus time, but Raj's hospital schedule makes it hard to plan. The nanny three days a week helps, but that still leaves two days where you're juggling both. How does a typical workday look for you?"
+    },
+    {
+      "role": "user",
+      "content": "On nanny days, I can actually focus from about 9 to 3. I do meetings, roadmap planning, and stakeholder calls. But on the other two days, I'm constantly interrupted. I end up working from 9 PM to midnight to catch up.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Working until midnight twice a week to compensate is not sustainable long-term. That's a recipe for burnout. Have you talked to your team at Zenith about flexible scheduling on those non-nanny days?"
+    },
+    {
+      "role": "user",
+      "content": "I've hinted at it, but I haven't had a direct conversation. My manager is pretty understanding, but the company culture is very 'always on.' There's an expectation to be responsive on Slack during core hours.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "The gap between having an understanding manager and an 'always on' culture is real. I'd suggest having that direct conversation — frame it around productivity, not availability. You could propose blocking those two days as 'async only' where you respond to Slack but skip live meetings. Would that work with your role?"
+    },
+    {
+      "role": "user",
+      "content": "It might, actually. Most of my meetings are on Tuesdays and Thursdays, which are nanny days. The other days are more about documentation and sprint planning I could do asynchronously.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's actually a great natural split. If you can formalize it — meetings and synchronous work on nanny days, async deep work on the others — you'd have a structure that works for both your team and your family. Is the nanny schedule flexible at all?"
+    },
+    {
+      "role": "user",
+      "content": "Not really, she has other families she works with. To be honest, I've been seriously considering going part-time. I think four days a week would make a huge difference. Raj and I have done the math and we could manage financially.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "If the finances work, part-time could be a game-changer. Four days would give you one full day just for the kids without the guilt of neglecting work. Before you propose it, think about which day you'd drop and how you'd redistribute your responsibilities. Have you seen others at Zenith go part-time?"
+    },
+    {
+      "role": "user",
+      "content": "I know one person in engineering who went to four days, so there's precedent. I think I'd drop Fridays. That would also give me time to pick Aarav up from school, which I haven't been able to do in months.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Having precedent at the company makes the ask much easier. Dropping Friday is smart — it's usually the lightest meeting day, and starting each weekend a day early would be meaningful for your whole family. I'd suggest writing a brief proposal for your manager that covers how you'd handle the reduced hours without dropping anything critical."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the person's name and what company does she work for?",
+      "expectedAnswer": "Priya Sharma, she works at Zenith Analytics as a product manager",
+      "expectedEntities": ["Priya", "Sharma", "Zenith Analytics", "product manager"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What are the names and ages of Priya's children?",
+      "expectedAnswer": "Aarav is 7 and Meera is 4",
+      "expectedEntities": ["Aarav", "7", "Meera", "4"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What does Priya's husband do, and what is his name?",
+      "expectedAnswer": "Her husband Raj works at a hospital",
+      "expectedEntities": ["Raj", "hospital"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What childcare arrangement does Priya have?",
+      "expectedAnswer": "A part-time nanny three days a week for Meera",
+      "expectedEntities": ["nanny", "three days"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What schedule change is Priya considering, and which day would she drop?",
+      "expectedAnswer": "She is considering going part-time, four days a week, dropping Fridays",
+      "expectedEntities": ["part-time", "four days", "Fridays"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
+    }
+  ]
+}
