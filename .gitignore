@@ -5,16 +5,22 @@ package-lock.json
 
 # Build output
 dist/
+*.tsbuildinfo
 
-# Results (large files, optional to track)
-results/raw/*.jsonl
-results/scored/*.jsonl
+# Results (experiment outputs - large files)
+results/raw/
+results/scored/
+results/reports/
+
+# Claude Code local config
+.claude/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+*~
 
 # OS
 .DS_Store
@@ -23,3 +29,16 @@ Thumbs.db
 # Environment
 .env
 .env.local
+.env.*.local
+
+# Test coverage
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
