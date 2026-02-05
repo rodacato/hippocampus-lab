@@ -1,0 +1,146 @@
+{
+  "id": "multi-03",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I just finished reading Thinking, Fast and Slow by Daniel Kahneman. It completely changed how I think about decision-making and cognitive biases.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a foundational book in behavioral economics. Kahneman's framework of System 1 and System 2 thinking is incredibly powerful. What resonated with you the most?"
+    },
+    {
+      "role": "user",
+      "content": "The parts about anchoring bias and how we're terrible at estimating probabilities. I want to read more behavioral economics books. Can you recommend some?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Great picks from the book. For more behavioral economics, I'd recommend Predictably Irrational by Dan Ariely, which explores how we make irrational choices in systematic ways. Also Nudge by Richard Thaler and Cass Sunstein, which applies behavioral insights to policy design. And Misbehaving by Thaler is a more personal and entertaining look at the field."
+    },
+    {
+      "role": "user",
+      "content": "I've heard of Nudge. I'll look into those. Actually, the reason I'm so drawn to this topic right now is that I'm facing a big career decision myself.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "It's interesting how reading about decision-making frameworks can make you more aware of your own big choices. What's the career decision you're weighing?"
+    },
+    {
+      "role": "user",
+      "content": "I'm a data analyst at Meridian Group. It's stable, good salary, but I feel like I've plateaued. I just got an offer from a startup called Bloom Health that does healthcare analytics.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a classic stability versus growth dilemma. Healthcare analytics is a booming field, and startups can offer a lot of learning opportunities and faster career growth. But the risk profile is obviously different. What does the Bloom Health role look like compared to your current position?"
+    },
+    {
+      "role": "user",
+      "content": "It's a senior analyst role with some team leadership. The pay is slightly less but they're offering equity. My mentor Patricia Yang told me I should wait and not rush the decision.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Patricia sounds like a wise mentor. Taking time to evaluate is especially important with startup equity since the value is speculative. What's her reasoning for waiting? Does she think a better opportunity might come along, or is she concerned about Bloom Health specifically?"
+    },
+    {
+      "role": "user",
+      "content": "She thinks I should negotiate more aggressively and also evaluate the startup's funding situation. They just finished a Series A round, so she wants me to understand their runway.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's solid advice. A Series A company is still early stage, and understanding their burn rate and runway is critical. You don't want to jump ship only to face layoffs in eighteen months. Have you been able to get any financial details from them?"
+    },
+    {
+      "role": "user",
+      "content": "Not yet, I have a follow-up meeting next week. But going back to books for a second, do you have any recommendation specifically about decision-making? Like, something that could actually help me think through this career choice more clearly?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Perfect timing for this question. I'd strongly recommend Decisive by Chip and Dan Heath. It's specifically about how to make better decisions and has a practical four-step framework called WRAP. Also The Art of Thinking Clearly by Rolf Dobelli is a quick read that catalogs common reasoning errors. Either one could give you useful mental tools for the Bloom Health decision."
+    },
+    {
+      "role": "user",
+      "content": "Decisive sounds perfect. I love practical frameworks. I think between that and Patricia's advice, I can approach this more systematically instead of going on gut feeling.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a great approach. And honestly, the fact that you're reading Kahneman and seeking out frameworks shows you're already thinking about this the right way. Most people make career moves on pure emotion. Take the time Patricia suggested, read Decisive before your follow-up meeting, and go in with a structured evaluation. You'll make a much more confident choice."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What book did the user just finish reading and who is the author?",
+      "expectedAnswer": "Thinking, Fast and Slow by Daniel Kahneman",
+      "expectedEntities": ["Thinking, Fast and Slow", "Kahneman"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What genre of books is the user interested in reading more of?",
+      "expectedAnswer": "Behavioral economics books",
+      "expectedEntities": ["behavioral economics"],
+      "infoLocation": "early",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What are the two companies the user is choosing between for their career?",
+      "expectedAnswer": "Meridian Group (current employer) and Bloom Health (startup offer)",
+      "expectedEntities": ["Meridian Group", "Bloom Health"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Who is the user's mentor and what advice did she give?",
+      "expectedAnswer": "Patricia Yang advised waiting and not rushing the decision",
+      "expectedEntities": ["Patricia Yang"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What book about decision-making did the assistant recommend that the user was most interested in?",
+      "expectedAnswer": "Decisive by Chip and Dan Heath",
+      "expectedEntities": ["Decisive"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

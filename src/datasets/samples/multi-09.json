@@ -1,0 +1,159 @@
+{
+  "id": "multi-09",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I've been working on a side project lately. It's a weather app called SkyLens and I'm building it with React Native.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That sounds like a cool project! React Native is a great choice for a weather app since you can target both iOS and Android. What data source are you using for the weather information?"
+    },
+    {
+      "role": "user",
+      "content": "I'm using the OpenWeatherMap API. The free tier gives me enough calls for development and testing. I've got the basic current weather display working already.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "OpenWeatherMap is a solid choice. Their free tier is pretty generous for development. Are you planning to add forecast data too, or keeping it focused on current conditions?"
+    },
+    {
+      "role": "user",
+      "content": "I want to add a 7-day forecast and also hourly breakdowns. The main thing that'll set SkyLens apart is I'm adding a feature that suggests what to wear based on the weather. Like it'll recommend a jacket if it's going to rain.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "The clothing recommendation feature is a great differentiator. There are tons of weather apps but not many that give practical wardrobe advice. That could really resonate with users. How's the development going timeline-wise?"
+    },
+    {
+      "role": "user",
+      "content": "Honestly, it's been slow because my main job has been absolutely draining me. I work at Cornerstone Media and things have been rough lately.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "I'm sorry to hear that. When the day job is stressful, it's hard to find energy for side projects. What's been going on at Cornerstone Media?"
+    },
+    {
+      "role": "user",
+      "content": "My boss Gerald keeps moving the deadlines on the project I'm leading. It's called the Horizon project and every time we're about to hit a milestone, he changes the scope or pushes the date forward. The team is exhausted.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Constant scope changes and moving deadlines are incredibly demoralizing for a team. It sounds like there might be a lack of clear project governance. Have you raised this concern with Gerald directly?"
+    },
+    {
+      "role": "user",
+      "content": "I've tried bringing it up in our one-on-ones but he just deflects and says \"that's the nature of the business.\" I'm seriously considering talking to HR about the workload because two people on my team have already quit this quarter.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Two team members quitting in one quarter is a major red flag and actually strengthens your case if you go to HR. Document everything: the timeline changes, the original versus revised scopes, and the impact on the team. HR is more likely to act when they see concrete data about turnover and workload."
+    },
+    {
+      "role": "user",
+      "content": "That's a good point. I've been keeping emails and Slack messages that show the shifting timelines. I'll put together a summary document before I go to HR.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "A well-organized summary will make a huge difference. Include dates, original commitments versus changes, and any written responses from Gerald. That turns it from a complaint into a professional escalation."
+    },
+    {
+      "role": "user",
+      "content": "Thanks, I'll do that. Honestly, the whole situation is making me want to go all in on SkyLens. I want to launch it on the App Store by April and see if it can generate some income.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "April is an ambitious but achievable target if you can carve out consistent development time. What features do you still need to build before it's launch-ready?"
+    },
+    {
+      "role": "user",
+      "content": "The core weather display is done. I still need to finish the 7-day forecast view, the clothing suggestion engine, and the push notifications for severe weather alerts. Plus I need to handle the App Store review process which I've never done before.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a solid list of remaining work. I'd prioritize the forecast view and clothing suggestions since those are your core features. Push notifications and the App Store submission process can come last. Apple's review typically takes a few days, so build that into your April timeline. The good news is React Native has great documentation for the App Store submission process."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the name of the side project and what technology is it built with?",
+      "expectedAnswer": "SkyLens, built with React Native",
+      "expectedEntities": ["SkyLens", "React Native"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What API is being used for weather data in the side project?",
+      "expectedAnswer": "OpenWeatherMap API",
+      "expectedEntities": ["OpenWeatherMap"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Where does the user work and what is the name of their boss?",
+      "expectedAnswer": "Cornerstone Media, boss is Gerald",
+      "expectedEntities": ["Cornerstone Media", "Gerald"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the name of the project at work that keeps having deadline changes?",
+      "expectedAnswer": "The Horizon project",
+      "expectedEntities": ["Horizon"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "When does the user want to launch their app on the App Store?",
+      "expectedAnswer": "By April",
+      "expectedEntities": ["App Store", "April"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
+    }
+  ]
+}

@@ -1,0 +1,159 @@
+{
+  "id": "multi-04",
+  "turns": [
+    {
+      "role": "user",
+      "content": "We're renovating our kitchen and the budget we've set is $35,000. I want to make sure we stick to that number because things tend to spiral with renovations.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "A $35,000 kitchen budget is solid and can get you a really nice result if managed well. You're right that scope creep is the biggest risk with renovations. Have you already hired a contractor or are you still getting quotes?"
+    },
+    {
+      "role": "user",
+      "content": "We hired Mike from Prestige Builders. He came highly recommended from our neighbor and his estimate came in right at budget.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's great that the estimate aligns with your budget. Personal recommendations are the best way to find a good contractor. Has Mike given you a detailed breakdown of where the money goes, like how much for cabinets versus countertops versus labor?"
+    },
+    {
+      "role": "user",
+      "content": "He has a rough breakdown. Cabinets are the biggest chunk. But actually, I've been thinking about our overall financial picture too. We don't really have a proper emergency fund right now.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's an important consideration, especially when you're about to spend a significant amount on renovations. Having an emergency fund is a financial safety net everyone should have. What are you thinking in terms of a target amount?"
+    },
+    {
+      "role": "user",
+      "content": "I want to save $10,000 for the emergency fund. I figure that covers about three months of essentials for us. I've been setting aside money from each paycheck.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Three months of expenses is a great starting point. The standard recommendation is three to six months, so $10,000 gets you in a safe zone. Are you comfortable doing the kitchen renovation and building the emergency fund at the same time, or does one need to take priority?"
+    },
+    {
+      "role": "user",
+      "content": "That's exactly the tension. And it gets more complicated because my partner Alex thinks we should renovate the bathroom at the same time as the kitchen, since Mike is already going to be at our place.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Alex has a practical point. Having the contractor already on site can save on mobilization costs and you only deal with the disruption once. But it would obviously increase the total project cost. Did Mike give an estimate for adding the bathroom?"
+    },
+    {
+      "role": "user",
+      "content": "He mentioned it would add about $15,000 to $18,000 depending on fixtures. Which would put us way over what I'm comfortable spending while also trying to build the emergency fund.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "So you'd be looking at $50,000 to $53,000 total for both renovations, plus you want to set aside $10,000 for emergencies. That's a lot of financial outflow at once. Have you and Alex discussed prioritizing one over the other?"
+    },
+    {
+      "role": "user",
+      "content": "We've been going back and forth. I think we should do the kitchen now and the bathroom next year. But let's go back to the kitchen for a second. We need to decide on countertops. Mike asked us to choose between quartz and granite.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Both are excellent choices. Quartz is engineered stone, so it's non-porous, very low maintenance, and comes in highly consistent patterns. Granite is natural stone, each slab is unique, and it has that classic look, but it needs periodic sealing. Price-wise, they're in a similar range, though high-end granite can get expensive. Do you have a preference between the two?"
+    },
+    {
+      "role": "user",
+      "content": "I'm leaning toward quartz because of the low maintenance. We cook a lot and I don't want to worry about sealing and staining. Alex prefers the look of granite though, so we need to find a compromise.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "A possible compromise is looking at quartz options that mimic the look of natural granite. Brands like Cambria and Caesarstone have patterns that look remarkably like real stone but with all the low-maintenance benefits of quartz. You might also visit a showroom together so Alex can see the quartz options in person. Sometimes the visual difference is smaller than people expect."
+    },
+    {
+      "role": "user",
+      "content": "That's a smart idea. I'll suggest we go to a showroom this weekend. Mike actually mentioned he gets a discount at a stone yard in the area, so we should ask him about that too.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Definitely take advantage of Mike's contractor discount. That could save you a meaningful amount on the countertops, which would help keep the project within your $35,000 budget. Ask him which stone yard it is and whether they have quartz options that might satisfy both you and Alex."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the budget for the kitchen renovation?",
+      "expectedAnswer": "$35,000",
+      "expectedEntities": ["$35,000"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Who is the contractor and what company is he from?",
+      "expectedAnswer": "Mike from Prestige Builders",
+      "expectedEntities": ["Mike", "Prestige Builders"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "How much does the user want to save for an emergency fund?",
+      "expectedAnswer": "$10,000, covering about three months of essentials",
+      "expectedEntities": ["$10,000"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What additional renovation does the user's partner want to do, and who is the partner?",
+      "expectedAnswer": "Partner Alex wants to renovate the bathroom at the same time",
+      "expectedEntities": ["Alex", "bathroom"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What two countertop materials are being considered and which does the user prefer?",
+      "expectedAnswer": "Quartz and granite; the user prefers quartz for low maintenance, while Alex prefers granite's look",
+      "expectedEntities": ["quartz", "granite"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

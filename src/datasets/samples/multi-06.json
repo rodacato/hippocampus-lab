@@ -1,0 +1,159 @@
+{
+  "id": "multi-06",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Hey! I've been learning to play guitar and I'm currently working on \"Blackbird\" by The Beatles. It's such a beautiful song.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a fantastic choice! Blackbird is one of those songs that sounds deceptively simple but has a really intricate fingerpicking pattern. How long have you been playing guitar?"
+    },
+    {
+      "role": "user",
+      "content": "I've been practicing for about 3 weeks now. I'm using the JustinGuitar online course to learn the basics and it's been really helpful.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "JustinGuitar is one of the best free resources out there for beginners. Three weeks in and already tackling Blackbird is ambitious though. Are you playing on an acoustic or electric?"
+    },
+    {
+      "role": "user",
+      "content": "Acoustic guitar. I figured I'd start there since Blackbird sounds best on acoustic anyway. The fingerpicking is really tricky though, especially the part where you walk up the fretboard.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That ascending chromatic line is definitely the hardest part. Take it slow and practice each measure individually before stringing them together. Is there a particular reason you chose this song to learn first?"
+    },
+    {
+      "role": "user",
+      "content": "Actually yes! I want to perform it at my roommate Jake's surprise birthday party. His birthday is on February 22 and we're throwing him a party.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's such a thoughtful gift! A live performance of his favorite song would be really memorable. Where are you planning to have the party?"
+    },
+    {
+      "role": "user",
+      "content": "We booked The Rooftop Bar on 5th Avenue. It has a nice open space and they have a small stage area which is perfect for the performance.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "A rooftop bar with a stage sounds like an ideal venue for a surprise party. Have you sorted out the guest list and budget yet?"
+    },
+    {
+      "role": "user",
+      "content": "Yeah, I've invited 15 people so far. I'm trying to keep the budget around $400 total, which covers food, drinks, and a small decoration setup.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "$400 for 15 people is doable, especially if the venue doesn't charge a rental fee. That's roughly $26 per person. Are you handling the food yourself or going through the bar's catering?"
+    },
+    {
+      "role": "user",
+      "content": "The bar has a party package that includes appetizers and a drink per person, which helps a lot. The rest goes to decorations and the birthday cake.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That sounds like a solid plan. Party packages usually save a lot of hassle. Going back to the guitar performance, do you feel like you'll be ready by February 22?"
+    },
+    {
+      "role": "user",
+      "content": "I think so if I keep practicing every day. I can play through most of the song but I still stumble on the bridge section. I've been doing about an hour of practice each evening.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "An hour a day is solid practice time. For the bridge, try isolating just those four measures and looping them at half speed with a metronome. You still have a few weeks, so you should be in good shape by the party."
+    },
+    {
+      "role": "user",
+      "content": "Good idea with the metronome. I'm also thinking about learning a second song as a backup in case I freeze up on stage. Maybe \"Wonderwall\" since it's simpler chords.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Having a backup song is a smart move, especially for your first live performance. Wonderwall is a great choice because it's mostly open chords and everyone knows the melody. Between the two songs and the rooftop venue, Jake's going to have an amazing surprise birthday."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What song is the user learning to play on guitar?",
+      "expectedAnswer": "Blackbird by The Beatles",
+      "expectedEntities": ["Blackbird", "The Beatles"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What online course is the user using to learn guitar, and how long have they been practicing?",
+      "expectedAnswer": "JustinGuitar, for about 3 weeks",
+      "expectedEntities": ["JustinGuitar", "3 weeks"],
+      "infoLocation": "early",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "Where is the surprise birthday party being held and when is it?",
+      "expectedAnswer": "The Rooftop Bar on 5th Avenue, on February 22",
+      "expectedEntities": ["The Rooftop Bar", "5th Avenue", "February 22"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "How many people have been invited to the party and what is the budget?",
+      "expectedAnswer": "15 people, with a budget of around $400",
+      "expectedEntities": ["15", "$400"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What backup song is the user considering learning in case of stage fright?",
+      "expectedAnswer": "Wonderwall",
+      "expectedEntities": ["Wonderwall"],
+      "infoLocation": "recent",
+      "salienceLevel": "low"
+    }
+  ]
+}

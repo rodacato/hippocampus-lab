@@ -1,0 +1,159 @@
+{
+  "id": "multi-08",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I'm getting married to my partner Sam in October and the planning is getting intense. We booked Willow Creek Estate as our venue.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Congratulations on the engagement! Willow Creek Estate is a beautiful choice. October weddings have gorgeous foliage too. How far along are you in the planning process?"
+    },
+    {
+      "role": "user",
+      "content": "We've got the big things locked down. The venue has a capacity of 150 people and our guest list is sitting at about 120, so we have some breathing room.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "120 out of 150 is a comfortable margin. That gives you flexibility for any last-minute additions without feeling cramped. Have you sorted out the major vendors like catering, flowers, and photography?"
+    },
+    {
+      "role": "user",
+      "content": "Photography and catering are booked. The florist is the next big one. But honestly, right now I'm more stressed about family drama than the actual wedding logistics.",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Family dynamics during wedding planning are often the hardest part. What's going on?"
+    },
+    {
+      "role": "user",
+      "content": "It's my sister Rachel. She started dating someone new about a month ago and she's insisting on bringing him as her plus-one. I barely know this guy and I don't want a stranger in all our wedding photos.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a tough spot. On one hand, plus-ones are pretty standard, but it's also your wedding and you want to feel comfortable with everyone there. Have you talked to Rachel directly about how you feel?"
+    },
+    {
+      "role": "user",
+      "content": "I tried, but she got really defensive. And now my mother Dorothy is siding with Rachel, saying I'm being controlling. It's turned into a whole thing.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "When parents take sides it escalates fast. Your concern is valid though. One possible compromise is to invite him to the reception but not the ceremony, or set a rule that plus-ones are only for partners of six months or longer. That way it's a policy, not personal."
+    },
+    {
+      "role": "user",
+      "content": "The six-month rule is actually a really good idea. That way it's not about Rachel specifically. Sam suggested something similar too. I think I'll frame it that way and see if it calms things down.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "If both you and Sam are on the same page, that makes it much easier to present as a united front. Frame it as a practical decision about seating and budget, not about Rachel's boyfriend. Hopefully that takes the emotional charge out of it."
+    },
+    {
+      "role": "user",
+      "content": "Yeah, I'll try that approach this weekend when we have the family dinner. Anyway, on a happier note, we have our florist appointment with Bloom & Co on Tuesday and I'm really excited about it.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's exciting! Bloom & Co does beautiful work. Do you and Sam have a vision for the floral arrangements? Any particular color palette or flower preferences?"
+    },
+    {
+      "role": "user",
+      "content": "We're thinking warm autumn tones. Lots of burgundy, burnt orange, and cream. Sam really loves dahlias so those will definitely be featured. We want it to feel lush but not over the top.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Dahlias are perfect for an October wedding and they come in all of those warm tones naturally. Burgundy dahlias with burnt orange accents and cream roses would be stunning. Make sure to bring reference photos to your Tuesday appointment so Bloom & Co can nail the vibe you're going for."
+    },
+    {
+      "role": "user",
+      "content": "Good idea. I've been saving photos on Pinterest all month. I'll put together a board to bring with us. Thanks for the advice on the Rachel situation too, it really helped me think about it more clearly.",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "A Pinterest board is the best thing you can bring to a florist consultation. And I'm glad the framing idea helped with the family situation. Wedding planning is stressful enough without interpersonal drama on top. Focus on the exciting parts like Tuesday's appointment, and tackle the tough conversations one at a time. It's going to be a beautiful wedding."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "Who is the user marrying and what is the wedding venue?",
+      "expectedAnswer": "Marrying partner Sam, at Willow Creek Estate in October",
+      "expectedEntities": ["Sam", "Willow Creek Estate", "October"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the venue capacity and how many guests are expected?",
+      "expectedAnswer": "Capacity of 150, guest list is about 120 people",
+      "expectedEntities": ["150", "120"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the family conflict about and who is involved?",
+      "expectedAnswer": "Sister Rachel wants to bring her new boyfriend as a plus-one and mother Dorothy is siding with Rachel",
+      "expectedEntities": ["Rachel", "Dorothy"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the name of the florist and when is the appointment?",
+      "expectedAnswer": "Bloom & Co, appointment on Tuesday",
+      "expectedEntities": ["Bloom & Co", "Tuesday"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What flowers and color palette does the couple want for the wedding?",
+      "expectedAnswer": "Dahlias featured prominently, with burgundy, burnt orange, and cream autumn tones",
+      "expectedEntities": ["dahlias", "burgundy", "burnt orange", "cream"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

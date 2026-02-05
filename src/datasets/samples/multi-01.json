@@ -1,0 +1,146 @@
+{
+  "id": "multi-01",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I'm starting to plan a trip to Lisbon, Portugal. I've been wanting to go for years and I'm looking at April 15 through April 22.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Lisbon in mid-April is a wonderful choice! The weather should be mild and pleasant, and you'll avoid the peak summer crowds. That gives you a full week to explore. Have you started looking at flights or accommodations yet?"
+    },
+    {
+      "role": "user",
+      "content": "Yes, I found a good fare with TAP Air Portugal departing from JFK. It's a direct flight which is nice.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "TAP Air Portugal is a solid choice for that route, and a direct flight from JFK to Lisbon is about seven hours, which is very manageable. Have you looked into which neighborhood to stay in? Alfama and Baixa are popular for first-time visitors."
+    },
+    {
+      "role": "user",
+      "content": "I was thinking Alfama for the charm. But actually, I just realized I might have a conflict. My work project Atlas is due on April 18 and it's a major deliverable.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a significant overlap. April 18 falls right in the middle of your planned trip. Is there any flexibility on the project deadline, or could you potentially finish the deliverable before you leave?"
+    },
+    {
+      "role": "user",
+      "content": "That's the thing. My manager Sarah actually asked me to submit the deliverable early, before April 15 if possible. She wants buffer time for review.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That could actually work in your favor. If Sarah wants it early and you can deliver before April 15, you'd be free and clear for the trip. How realistic is it to have the Atlas deliverable done by, say, April 12 or 13?"
+    },
+    {
+      "role": "user",
+      "content": "Honestly, it's tight. The Atlas project involves a full data migration and there are a lot of unknowns. I'm not confident I can finish early enough.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's understandable. Data migrations are notoriously unpredictable. You don't want to be stressed about a deadline while trying to enjoy pasteis de nata in Belem. What are you thinking?"
+    },
+    {
+      "role": "user",
+      "content": "I'm seriously considering postponing the trip to May. Maybe the second or third week. The flights should still be reasonable.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "May is actually lovely in Lisbon too. Slightly warmer, and you'd still be ahead of the summer rush. Plus, you'd have peace of mind knowing the Atlas project is wrapped up. Would you rebook with TAP or look at other airlines?"
+    },
+    {
+      "role": "user",
+      "content": "I'd probably stick with TAP since their change fees are reasonable. By the way, for the trip itself, do you have restaurant recommendations in Lisbon? I love seafood.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely. For seafood in Lisbon, Cervejaria Ramiro is legendary for shellfish. Ponto Final across the river in Cacilhas has great grilled fish with a view. And for a more upscale experience, Sea Me Peixaria Moderna in Chiado does creative seafood dishes. Since you'll have a full week, you could easily try all three."
+    },
+    {
+      "role": "user",
+      "content": "Those sound amazing. I'll save those. Now I just need to figure out the Atlas timeline so I can rebook with confidence. Do you think I should talk to Sarah about the situation?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Definitely. Being transparent with Sarah is the right move. You could let her know you're aiming to deliver early as she requested but want to confirm a realistic timeline. She'll likely appreciate the proactive communication, and it might also help you get clarity on whether the April 18 deadline has any wiggle room."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "Where is the user planning to travel, and what are the original dates?",
+      "expectedAnswer": "Lisbon, Portugal from April 15 to April 22",
+      "expectedEntities": ["Lisbon", "Portugal", "April 15", "April 22"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What airline and departure airport did the user mention for their flight?",
+      "expectedAnswer": "TAP Air Portugal departing from JFK",
+      "expectedEntities": ["TAP Air Portugal", "JFK"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the name of the work project and when is it due?",
+      "expectedAnswer": "Project Atlas, due April 18",
+      "expectedEntities": ["Atlas", "April 18"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Who is the user's manager and what did she request regarding the deliverable?",
+      "expectedAnswer": "Sarah is the manager; she asked for the deliverable to be submitted early, before April 15",
+      "expectedEntities": ["Sarah", "April 15"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What is the user considering doing about the trip due to the work conflict?",
+      "expectedAnswer": "Postponing the trip to May, the second or third week",
+      "expectedEntities": ["May"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

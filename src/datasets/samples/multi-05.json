@@ -1,0 +1,159 @@
+{
+  "id": "multi-05",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I have a golden retriever named Charlie. He's 4 years old and the sweetest dog, but I just got some news from the vet.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Golden retrievers are wonderful dogs. I hope the vet news isn't anything too serious. What did they say about Charlie?"
+    },
+    {
+      "role": "user",
+      "content": "Dr. Patel examined him last week and said Charlie needs a dental cleaning. Apparently there's some tartar buildup that could lead to gum disease if we don't address it.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Dental cleanings for dogs are pretty routine, though they do require anesthesia which makes people nervous. At 4 years old, Charlie should handle it just fine. Did Dr. Patel give you a timeline for when it needs to happen?"
+    },
+    {
+      "role": "user",
+      "content": "She said within the next couple of months, so it's not urgent but shouldn't be put off too long. The thing is, we have a lot going on right now. We're actually moving to a new apartment.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Moving is stressful enough on its own, and coordinating a vet appointment on top of that adds another layer. When is the move happening?"
+    },
+    {
+      "role": "user",
+      "content": "We're moving to 742 Elm Street on March 1st. It's a bigger place with a nice layout, and it's closer to my office which will cut my commute in half.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That sounds like a great upgrade, especially the shorter commute. A bigger place will be nice for Charlie too, more room to stretch out. Is the new apartment pet-friendly?"
+    },
+    {
+      "role": "user",
+      "content": "Yes, the building allows pets, but there's a catch. They have a weight limit of 50 pounds for dogs. And Charlie weighs 65 pounds.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a significant issue. A 15-pound difference over the limit is hard to overlook. Have you already signed the lease, or is this something you discovered during the application process?"
+    },
+    {
+      "role": "user",
+      "content": "We signed the lease but I disclosed that I have a large dog. The landlord Mrs. Kowalski said she might be willing to grant a pet waiver if I provide vet records and pay an additional pet deposit.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's encouraging that Mrs. Kowalski is open to a waiver. Get Dr. Patel to provide records showing Charlie is healthy, well-behaved, and up to date on vaccinations. A letter from the vet vouching for his temperament could go a long way too. What's the additional pet deposit amount?"
+    },
+    {
+      "role": "user",
+      "content": "She mentioned $500 on top of the regular deposit, which seems fair honestly. I just want to make sure the waiver goes through before March 1st so there are no surprises on moving day.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely, you want that squared away well in advance. I'd suggest reaching out to Mrs. Kowalski this week to start the waiver process. Collect Charlie's vet records from Dr. Patel, write a brief letter about Charlie's temperament, and offer to pay the deposit upfront. The sooner you get written confirmation of the waiver, the less stress on your end."
+    },
+    {
+      "role": "user",
+      "content": "Good plan. I should probably schedule Charlie's dental cleaning for after the move too, once we're settled in. I don't want him recovering from anesthesia in the middle of a move.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a smart call. Moving is stressful for dogs too, and adding a medical procedure on top of that wouldn't be ideal. Once you're settled at 742 Elm Street, give Charlie a couple of weeks to adjust to the new environment, then schedule the dental cleaning with Dr. Patel. That would put it in mid to late March, which is still well within the timeframe she recommended."
+    },
+    {
+      "role": "user",
+      "content": "Exactly. Mid-March sounds right. I also need to find a dog park near the new place. Charlie is super social and he needs his off-leash time to burn energy.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Once you have the new address locked in, you can search for dog parks near 742 Elm Street. Most cities have apps or websites that list nearby dog parks with reviews. Golden retrievers like Charlie definitely need that off-leash running time. It'll also help him adjust to the new neighborhood faster if he makes some dog friends at the park."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What kind of dog does the user have, what is its name, and how old is it?",
+      "expectedAnswer": "A golden retriever named Charlie, 4 years old",
+      "expectedEntities": ["golden retriever", "Charlie", "4"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What did the vet say Charlie needs, and what is the vet's name?",
+      "expectedAnswer": "Dr. Patel said Charlie needs a dental cleaning due to tartar buildup",
+      "expectedEntities": ["Dr. Patel", "dental cleaning"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the address and move-in date for the new apartment?",
+      "expectedAnswer": "742 Elm Street, moving on March 1st",
+      "expectedEntities": ["742 Elm Street", "March 1st"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the pet weight limit at the new apartment and how much does Charlie weigh?",
+      "expectedAnswer": "The weight limit is 50 pounds and Charlie weighs 65 pounds",
+      "expectedEntities": ["50", "65"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Who is the landlord and what does the user need from her regarding the dog?",
+      "expectedAnswer": "Mrs. Kowalski is the landlord; the user needs a pet waiver from her",
+      "expectedEntities": ["Mrs. Kowalski", "pet waiver"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
+    }
+  ]
+}

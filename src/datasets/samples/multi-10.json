@@ -1,0 +1,159 @@
+{
+  "id": "multi-10",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I've been learning Japanese for a while now and I'm currently at the N4 level on the JLPT scale. Trying to push toward N3.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Nice! N4 is a solid foundation. You've got the basic grammar and can handle everyday conversations. N3 is a big step up though since it bridges the gap between basic and intermediate. What resources are you using to study?"
+    },
+    {
+      "role": "user",
+      "content": "For kanji I'm using WaniKani, which has been amazing for building recognition through spaced repetition. And for conversation practice I use iTalki to meet with a tutor.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "WaniKani and iTalki is a powerful combination. WaniKani handles the reading side systematically and iTalki fills in the speaking and listening gaps. How often do you meet with your tutor?"
+    },
+    {
+      "role": "user",
+      "content": "I have lessons with my tutor Kenji-san every Wednesday at 7pm. We usually do a mix of conversation practice and grammar review. He's really patient and adjusts the difficulty based on how I'm doing.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Having a consistent weekly schedule with a tutor who adapts to your level is ideal. Wednesday evenings sound like a good slot too since you can review what you learned over the weekend. What's motivating you to reach N3?"
+    },
+    {
+      "role": "user",
+      "content": "Actually, that's a great segue. I'm planning a trip to Tokyo in November and I want to be conversational enough to navigate without relying entirely on English.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "A trip to Japan is the ultimate motivation for language learning! November is a beautiful time to visit Tokyo with the autumn colors. How long are you planning to stay?"
+    },
+    {
+      "role": "user",
+      "content": "I'm planning 10 days with a budget of about $3000 total. I want to stay in the Shinjuku area since it's so centrally connected to everywhere by train.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "$3000 for 10 days in Tokyo is doable if you're smart about it. Shinjuku is a perfect base since it's a major hub for JR lines and the metro. Are you looking at hotels or maybe trying a traditional ryokan?"
+    },
+    {
+      "role": "user",
+      "content": "I'm thinking a mix. A hotel in Shinjuku for most of the trip but maybe a ryokan for one or two nights outside the city. I definitely want to visit Akihabara while I'm there since I'm into anime and electronics.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Akihabara is a must if you're into anime and electronics. You could easily spend a full day there between the multi-story arcades, figure shops, and electronics stores. The mix of hotel and ryokan is a great way to get both convenience and a traditional experience."
+    },
+    {
+      "role": "user",
+      "content": "Yeah I'm really excited about it. Going back to the language side though, I'm worried about kanji. I know about 400 kanji right now from WaniKani but N3 requires around 650. That's a lot to learn before November.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "250 more kanji over the next several months is achievable with WaniKani's pace. If you're doing your reviews consistently every day, WaniKani introduces new kanji at a steady rate. The key is not letting reviews pile up. How many reviews are you doing daily right now?"
+    },
+    {
+      "role": "user",
+      "content": "Usually about 100 to 150 reviews a day plus 10 to 15 new items. Some days I fall behind and the review pile gets intimidating. Kenji-san has been helping me by incorporating the newer kanji into our Wednesday conversation lessons.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a healthy pace. Having Kenji-san reinforce the kanji in context during your lessons is brilliant because it moves them from recognition into active use. For the days you fall behind, even doing just the critical reviews for 15 minutes is better than skipping entirely."
+    },
+    {
+      "role": "user",
+      "content": "True. I've also started watching Japanese dramas with Japanese subtitles instead of English ones. It's hard but I'm picking up more natural speech patterns that way.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Switching to Japanese subtitles is a huge step. It's painful at first but it forces your brain to process both the audio and the written form simultaneously. Between WaniKani, your weekly sessions with Kenji-san, and immersion through dramas, you have a really well-rounded study approach. If you keep this up, reaching N3 before your November Tokyo trip is very realistic."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What level is the user at in Japanese and what level are they trying to reach?",
+      "expectedAnswer": "Currently at N4 on the JLPT scale, trying to reach N3",
+      "expectedEntities": ["N4", "JLPT", "N3"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What tools is the user using to study Japanese?",
+      "expectedAnswer": "WaniKani for kanji and iTalki for conversation practice with a tutor",
+      "expectedEntities": ["WaniKani", "iTalki"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What is the tutor's name and when are the lessons?",
+      "expectedAnswer": "Kenji-san, every Wednesday at 7pm",
+      "expectedEntities": ["Kenji-san", "Wednesday", "7pm"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What are the user's travel plans and budget for Tokyo?",
+      "expectedAnswer": "10 days in November, budget of $3000, staying in Shinjuku area",
+      "expectedEntities": ["10 days", "November", "$3000", "Shinjuku"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What neighborhood in Tokyo does the user specifically want to visit for anime and electronics?",
+      "expectedAnswer": "Akihabara",
+      "expectedEntities": ["Akihabara"],
+      "infoLocation": "recent",
+      "salienceLevel": "medium"
+    }
+  ]
+}

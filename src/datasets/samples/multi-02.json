@@ -1,0 +1,146 @@
+{
+  "id": "multi-02",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I'm hosting a dinner party this Saturday and I want to make chicken tikka masala. It's one of my favorite dishes to cook for a group.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Chicken tikka masala is a fantastic choice for a dinner party. It's crowd-pleasing and you can do a lot of the prep ahead of time. How many guests are you expecting?"
+    },
+    {
+      "role": "user",
+      "content": "About eight people total. One thing I need to be really careful about is that my friend Olivia has a severe nut allergy. Like, anaphylaxis-level severe.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's critical to keep in mind. Many tikka masala recipes use cashew cream or ground almonds to thicken the sauce, and some store-bought curry pastes contain nuts or are processed in facilities that handle them. You'll want to read labels very carefully or make the spice blend from scratch."
+    },
+    {
+      "role": "user",
+      "content": "Right, that's what worries me. I usually use a jar of Patak's curry paste as my base. I need to double-check the label on that.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Good call. Patak's varies by product, so check the specific one you have. Some of their pastes include nut traces. If you're unsure, making your own paste from whole spices is the safest route. Would you like a from-scratch spice blend recipe?"
+    },
+    {
+      "role": "user",
+      "content": "Maybe. Actually, speaking of cooking skills, I've been thinking about signing up for a cooking class. There's one at Sur La Table that focuses on Indian cuisine.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Sur La Table has great hands-on classes. An Indian cuisine course would really level up your tikka masala game and teach you how to work with whole spices, toast them properly, and build flavor from the ground up. When is the class?"
+    },
+    {
+      "role": "user",
+      "content": "I think there's one in March. But honestly, I also want to start growing my own herbs. I have a balcony that gets good afternoon sun and I'd love to grow basil and cilantro.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Both basil and cilantro do well in containers on a sunny balcony. Basil loves the heat and afternoon sun, so that's perfect. Cilantro is a bit trickier since it tends to bolt quickly in warm weather, so you might want to succession plant it every few weeks to keep a steady supply."
+    },
+    {
+      "role": "user",
+      "content": "That's a good tip about succession planting. I go through cilantro so fast when I'm cooking Indian food. Fresh cilantro as a garnish on the tikka masala is non-negotiable for me.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Agreed, fresh cilantro makes all the difference. You could also grow mint on that balcony for raita or chutneys to serve alongside the tikka masala. That would make your dinner parties feel really elevated."
+    },
+    {
+      "role": "user",
+      "content": "Oh, mint is a great idea. But getting back to Saturday's dinner, I'm actually a little nervous about the nut allergy situation. I should probably check the curry paste brand before I buy groceries tomorrow.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Absolutely, that should be your top priority before shopping. Check the Patak's label online tonight if you can. Look for both the ingredients list and the allergen warning. If it says anything about tree nuts, peanuts, or shared equipment, I'd recommend going fully from scratch or finding a certified nut-free brand. Olivia's safety comes first."
+    },
+    {
+      "role": "user",
+      "content": "You're right. I'll look it up tonight. If Patak's doesn't work, can you walk me through making a basic tikka masala spice blend from scratch?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Of course. A basic tikka masala spice blend would be: cumin, coriander, paprika, turmeric, garam masala, and a bit of chili powder. Toast whole cumin and coriander seeds in a dry pan for about two minutes until fragrant, then grind them. Mix with the other ground spices. For the sauce base, use tomatoes, yogurt, garlic, ginger, and a touch of cream. No nuts needed at all. This way you have full control over every ingredient and can confidently tell Olivia it's safe."
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What dish is the user planning to cook and for what occasion?",
+      "expectedAnswer": "Chicken tikka masala for a dinner party on Saturday",
+      "expectedEntities": ["chicken tikka masala", "Saturday"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Who has a food allergy and what is the allergy?",
+      "expectedAnswer": "Friend Olivia has a severe nut allergy",
+      "expectedEntities": ["Olivia", "nut allergy"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Where is the cooking class the user mentioned, and what cuisine does it focus on?",
+      "expectedAnswer": "At Sur La Table, focusing on Indian cuisine",
+      "expectedEntities": ["Sur La Table", "Indian"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What herbs does the user want to grow on their balcony?",
+      "expectedAnswer": "Basil and cilantro",
+      "expectedEntities": ["basil", "cilantro"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What curry paste brand does the user need to check for nut allergens?",
+      "expectedAnswer": "Patak's curry paste",
+      "expectedEntities": ["Patak's"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
+    }
+  ]
+}

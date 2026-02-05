@@ -1,0 +1,159 @@
+{
+  "id": "multi-07",
+  "turns": [
+    {
+      "role": "user",
+      "content": "I'm trying to lose 15 pounds by June. Right now I'm at 195 pounds and I want to get down to 180.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "That's a realistic and healthy goal. Losing 15 pounds over roughly five months works out to about 3 pounds per month, which is well within the safe range. Do you have an exercise routine in place yet?"
+    },
+    {
+      "role": "user",
+      "content": "Yeah, I've been running 3 times per week at Riverside Park. Usually Monday, Wednesday, and Friday mornings before work.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Three runs a week is a great foundation. Riverside Park is a nice spot for running too. How far are you going each session?"
+    },
+    {
+      "role": "user",
+      "content": "About 3 miles each time. I started at 2 miles and worked my way up. I want to eventually do a longer distance but I'm building slowly to avoid injury.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Smart approach. Increasing mileage gradually is the best way to prevent overuse injuries. Have you thought about the nutrition side of things? Diet tends to be the bigger factor in weight loss."
+    },
+    {
+      "role": "user",
+      "content": "Funny you mention that. I actually just started meal prepping. My nutritionist Dr. Kim recommended I follow the Mediterranean diet and stick to around 1800 calories per day.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "The Mediterranean diet is one of the most well-researched diets out there. Lots of olive oil, fish, whole grains, and vegetables. And 1800 calories is a reasonable deficit for someone at 195 pounds who's active. How's the meal prep going so far?"
+    },
+    {
+      "role": "user",
+      "content": "It's been a bit overwhelming honestly. Cooking everything on Sundays takes like 4 hours. I found a meal prep service called FreshPrep that does Mediterranean-style meals for $12 per meal. I might switch to that for at least a few days a week.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "FreshPrep could be a good compromise. $12 per meal is on the pricier side but if it saves you time and keeps you on track with the diet, it might be worth it. You could do a hybrid approach where you prep the easy meals yourself and use FreshPrep for the more complex ones."
+    },
+    {
+      "role": "user",
+      "content": "That's exactly what I was thinking. I can handle breakfast and snacks on my own but lunch and dinner are where I struggle. By the way, speaking of goals, I signed up for a 10K race on June 8.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "fact",
+        "salienceLevel": "high"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "A 10K in June is a great motivator! That ties perfectly with your weight loss timeline. You're currently running 3 miles which is about 5K, so you'll need to roughly double your distance over the next few months. Have you looked into a training plan?"
+    },
+    {
+      "role": "user",
+      "content": "Not yet. I was thinking of using the Couch to 10K program but since I can already do a 5K, maybe I should find something more intermediate.",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "preference",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Since you already have a 5K base, look into a bridge-to-10K program. They typically assume you can run 3 miles comfortably and build you up over 6 to 8 weeks. That would fit your timeline perfectly."
+    },
+    {
+      "role": "user",
+      "content": "That sounds perfect. I also want to make sure I'm fueling properly for the longer runs. Should I adjust the 1800 calorie target on heavy running days?",
+      "metadata": {
+        "containsKeyInfo": true,
+        "keyInfoType": "instruction",
+        "salienceLevel": "medium"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "On days with longer runs, you might want to add 200 to 300 extra calories to support recovery. Check with Dr. Kim on the specifics since she knows your full health picture. Generally, a small post-run snack with protein and carbs goes a long way."
+    },
+    {
+      "role": "user",
+      "content": "Good call. I'll bring it up at my next appointment with her. I'm feeling really motivated now that I have both the weight loss goal and the race to work toward.",
+      "metadata": {
+        "containsKeyInfo": false,
+        "keyInfoType": "fact",
+        "salienceLevel": "low"
+      }
+    },
+    {
+      "role": "assistant",
+      "content": "Having dual goals that reinforce each other is a great strategy. The running supports the weight loss and the weight loss makes the running easier. With the Mediterranean diet, FreshPrep for convenience, and a solid training plan, you're set up well for June. Good luck with the 10K!"
+    }
+  ],
+  "recallQuestions": [
+    {
+      "question": "What is the user's current weight and weight loss goal?",
+      "expectedAnswer": "Currently 195 pounds, wants to lose 15 pounds to reach 180 by June",
+      "expectedEntities": ["195", "15 pounds", "June"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "Where does the user go running and how often?",
+      "expectedAnswer": "Riverside Park, 3 times per week",
+      "expectedEntities": ["Riverside Park", "3 times per week"],
+      "infoLocation": "early",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What diet was recommended and by whom, and what is the daily calorie target?",
+      "expectedAnswer": "The Mediterranean diet was recommended by nutritionist Dr. Kim, with a target of 1800 calories per day",
+      "expectedEntities": ["Mediterranean diet", "Dr. Kim", "1800 calories"],
+      "infoLocation": "middle",
+      "salienceLevel": "high"
+    },
+    {
+      "question": "What meal prep service did the user find, and how much does it cost?",
+      "expectedAnswer": "FreshPrep, at $12 per meal",
+      "expectedEntities": ["FreshPrep", "$12"],
+      "infoLocation": "middle",
+      "salienceLevel": "medium"
+    },
+    {
+      "question": "What race has the user signed up for and when is it?",
+      "expectedAnswer": "A 10K race on June 8",
+      "expectedEntities": ["10K", "June 8"],
+      "infoLocation": "recent",
+      "salienceLevel": "high"
+    }
+  ]
+}
