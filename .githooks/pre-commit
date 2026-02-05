@@ -30,6 +30,7 @@ if [ $TYPECHECK_EXIT -ne 0 ]; then
     echo ""
     echo -e "${RED}TypeScript check failed${NC}"
     echo "Fix the type errors before committing."
+    echo "See CONTRIBUTING.md for development workflow."
     exit 1
 fi
 echo -e "${GREEN}TypeScript check passed${NC}"
@@ -44,6 +45,7 @@ if [ $TEST_EXIT -ne 0 ]; then
     echo ""
     echo -e "${RED}Tests failed${NC}"
     echo "Fix the failing tests before committing."
+    echo "See CONTRIBUTING.md for testing guidelines."
     exit 1
 fi
 echo -e "${GREEN}Tests passed${NC}"

@@ -19,6 +19,7 @@ if echo "$COMMIT_MSG" | grep -qi "co-authored-by"; then
     echo "This project does not use co-author lines in commits."
     echo ""
     echo "Please remove the Co-Authored-By line and try again."
+    echo "See CONTRIBUTING.md for commit conventions."
     exit 1
 fi
 
@@ -54,6 +55,8 @@ if ! echo "$FIRST_LINE" | grep -qE "^(feat|fix|docs|style|refactor|test|chore|pe
     echo "  docs: update README"
     echo ""
     echo "Your message: $FIRST_LINE"
+    echo ""
+    echo "See CONTRIBUTING.md for full commit conventions."
     exit 1
 fi
 
@@ -72,6 +75,7 @@ LINE_LENGTH=${#FIRST_LINE}
 if [ $LINE_LENGTH -gt 100 ]; then
     echo -e "${RED}Error: Commit message first line too long ($LINE_LENGTH chars)${NC}"
     echo "Maximum allowed: 100 characters"
+    echo "See CONTRIBUTING.md for commit conventions."
     exit 1
 elif [ $LINE_LENGTH -gt 72 ]; then
     echo -e "${YELLOW}Warning: Commit message first line is $LINE_LENGTH chars${NC}"
