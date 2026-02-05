@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+bun.lockb
+package-lock.json
+
+# Build output
+dist/
+
+# Results (large files, optional to track)
+results/raw/*.jsonl
+results/scored/*.jsonl
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
