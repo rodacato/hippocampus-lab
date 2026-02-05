@@ -1,0 +1,173 @@
+/**
+ * Statistics aggregation and reporting
+ */
+
+import type {
+  EvaluatedResult,
+  TechniqueReport,
+  TechniqueMetrics,
+  ConfidenceInterval,
+  ExperimentReport,
+  CLIType,
+} from '../types.js';
+
+/**
+ * Group results by a key function
+ */
+function groupBy<T, K extends string>(items: T[], keyFn: (item: T) => K): Record<K, T[]> {
+  return items.reduce((acc, item) => {
+    const key = keyFn(item);
+    if (!acc[key]) acc[key] = [];
+    acc[key].push(item);
+    return acc;
+  }, {} as Record<K, T[]>);
+}
+
+/**
+ * Calculate mean of an array of numbers
+ */
+function mean(values: number[]): number {
+  if (values.length === 0) return 0;
+  return values.reduce((a, b) => a + b, 0) / values.length;
+}
+
+/**
+ * Calculate standard deviation
+ */
+function stdDev(values: number[]): number {
+  if (values.length <= 1) return 0;
+  const avg = mean(values);
+  const squareDiffs = values.map(v => Math.pow(v - avg, 2));
+  return Math.sqrt(mean(squareDiffs));
+}
+
+/**
+ * Calculate 95% confidence interval using t-distribution approximation
+ * For n >= 30, this is approximately 1.96 * stdErr
+ */
+function confidenceInterval95(values: number[]): ConfidenceInterval {
+  if (values.length === 0) return { lower: 0, upper: 0 };
+  if (values.length === 1) return { lower: values[0], upper: values[0] };
+
+  const avg = mean(values);
+  const stdErr = stdDev(values) / Math.sqrt(values.length);
+
+  // Use 1.96 for large samples, approximate t-value for smaller samples
+  const tValue = values.length >= 30 ? 1.96 : 2.0 + (30 - values.length) * 0.02;
+  const margin = tValue * stdErr;
+
+  return {
+    lower: Math.max(0, avg - margin),
+    upper: Math.min(1, avg + margin),
+  };
+}
+
+/**
+ * Calculate metrics for a set of results
+ */
+function calculateMetrics(results: EvaluatedResult[]): TechniqueMetrics {
+  const exactMatches = results.map(r => r.objective.exactMatch ? 1 : 0);
+  const entityRecalls = results.map(r => r.objective.entityRecall);
+  const coherences = results.map(r => r.subjective.coherence);
+  const fluencies = results.map(r => r.subjective.fluency);
+  const tokens = results.map(r => r.inputTokens ?? 0);
+  const latencies = results.map(r => r.latencyMs);
+
+  return {
+    avgTokens: mean(tokens),
+    avgLatencyMs: mean(latencies),
+    exactMatchRate: mean(exactMatches),
+    avgEntityRecall: mean(entityRecalls),
+    avgCoherence: mean(coherences),
+    avgFluency: mean(fluencies),
+    ci95: {
+      exactMatchRate: confidenceInterval95(exactMatches),
+      entityRecall: confidenceInterval95(entityRecalls),
+    },
+  };
+}
+
+/**
+ * Aggregate results by technique
+ */
+export function aggregateByTechnique(results: EvaluatedResult[]): TechniqueReport[] {
+  const byTechnique = groupBy(results, r => r.technique);
+
+  return Object.entries(byTechnique).map(([technique, techniqueResults]) => ({
+    technique,
+    n: techniqueResults.length,
+    metrics: calculateMetrics(techniqueResults),
+  }));
+}
+
+/**
+ * Generate a full experiment report
+ */
+export function generateReport(
+  results: EvaluatedResult[],
+  experimentId: string,
+  cli: CLIType,
+  model?: string
+): ExperimentReport {
+  return {
+    experimentId,
+    timestamp: new Date().toISOString(),
+    cli,
+    model,
+    techniques: aggregateByTechnique(results),
+  };
+}
+
+/**
+ * Format a report as markdown
+ */
+export function formatReportMarkdown(report: ExperimentReport): string {
+  const lines: string[] = [
+    `# Experiment Report: ${report.experimentId}`,
+    '',
+    `**Date:** ${report.timestamp}`,
+    `**CLI:** ${report.cli}${report.model ? ` (${report.model})` : ''}`,
+    '',
+    '## Results by Technique',
+    '',
+  ];
+
+  // Summary table
+  lines.push('| Technique | N | Exact Match | Entity Recall | Coherence | Fluency | Avg Tokens | Avg Latency |');
+  lines.push('|-----------|---|-------------|---------------|-----------|---------|------------|-------------|');
+
+  for (const t of report.techniques) {
+    const m = t.metrics;
+    lines.push(
+      `| ${t.technique} | ${t.n} | ` +
+      `${(m.exactMatchRate * 100).toFixed(1)}% | ` +
+      `${(m.avgEntityRecall * 100).toFixed(1)}% | ` +
+      `${m.avgCoherence.toFixed(2)} | ` +
+      `${m.avgFluency.toFixed(2)} | ` +
+      `${m.avgTokens.toFixed(0)} | ` +
+      `${m.avgLatencyMs.toFixed(0)}ms |`
+    );
+  }
+
+  lines.push('');
+  lines.push('## Confidence Intervals (95%)');
+  lines.push('');
+  lines.push('| Technique | Exact Match CI | Entity Recall CI |');
+  lines.push('|-----------|----------------|------------------|');
+
+  for (const t of report.techniques) {
+    const ci = t.metrics.ci95;
+    lines.push(
+      `| ${t.technique} | ` +
+      `[${(ci.exactMatchRate.lower * 100).toFixed(1)}%, ${(ci.exactMatchRate.upper * 100).toFixed(1)}%] | ` +
+      `[${(ci.entityRecall.lower * 100).toFixed(1)}%, ${(ci.entityRecall.upper * 100).toFixed(1)}%] |`
+    );
+  }
+
+  lines.push('');
+  lines.push('---');
+  lines.push('');
+  lines.push('*Generated by hippocampus-lab*');
+
+  return lines.join('\n');
+}
